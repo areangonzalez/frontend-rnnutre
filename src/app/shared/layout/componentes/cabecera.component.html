@@ -1,10 +1,10 @@
-<nav class="navbar navbar-expand-md navbar-pril fixed-top">
+<nav class="navbar navbar-expand-md bg-ds fixed-top">
   <button class="navbar-toggler" type="button" data-toggle="collapse" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="navbarCollapse"
       aria-expanded="false" aria-label="Toggle navigation">
       <span class="oi oi-menu"></span>
     </button>
   <a class="navbar-brand" [routerLink]="['/']">
-      <img src="../../../assets/img/logoRN.svg" width="60" height="40" alt="Desarrollo humano y articulación solidaria">
+      <img src="../../../assets/img/logoRN.svg" width="60" height="40" alt="Desarrollo humano y articulación solidaria"> <span>Nutre</span>
   </a>
   <!-- <a class="navbar-brand" href="#">PRIL</a> -->
   <div class="collapse navbar-collapse" id="navbarCollapse" [ngbCollapse]="isCollapsed">
