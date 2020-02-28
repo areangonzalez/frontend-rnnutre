@@ -2,4 +2,14 @@ body {
   overflow: hidden;
   background-color: #eeeeee;
 }
-
+.app-container {
+  position: absolute;
+  width: 100%;
+  overflow-y: auto;
+  top:66px;
+  height: 90%;
+}
+/* .container-fluid {
+  margin-bottom: 50px;
+  min-height: 80%;
+} */

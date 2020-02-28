@@ -3,11 +3,11 @@ import { Router} from '@angular/router';
 //import { AuthenticationService } from 'src/app/core/services';
 
 @Component({
-    selector: 'layout-cabecera',
-    templateUrl: './cabecera.component.html',
-    styleUrls: ['./cabecera.scss']
+    selector: 'registrar-buscar-persona',
+    templateUrl: './buscar-persona.component.html',
+    styleUrls: ['./buscar-persona.scss']
 })
-export class CabeceraComponent implements OnInit {
+export class BuscarPersonaComponent implements OnInit {
     public isCollapsed = true;
 
     constructor(
@@ -19,8 +19,7 @@ export class CabeceraComponent implements OnInit {
     ngOnInit(){
     }
 
-    /* cerrarSesion(){
-        this._authentication.logout();
-        this._router.navigate(['/login']);
-    } */
+    registrarPersona(){
+        this._router.navigate(['/registrar']);
+    }
 }

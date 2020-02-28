@@ -5,20 +5,19 @@ import { AppLayoutComponent } from './shared';
 const routes: Routes = [
 //  { path: 'login', component: LoginComponent },
   {
-    path: '',
+    path: 'buscar-persona',
     data: { title: 'Inicio' },
     component: AppLayoutComponent,
-    /* children: [
+    children: [
       { path: '',
-        canActivate: [AuthGuard],
-        loadChildren: './inicio/inicio.module#InicioModule'
+        loadChildren: './registrar/registrar.module#RegistrarModule'
       },
-      { path: 'destinatario',
+    /*  { path: 'destinatario',
         loadChildren: './destinatario/destinatario.module#DestinatarioModule',
         canActivate: [AuthGuard],
         data: { preload: true, title: 'Lista destinatarios', breadcrumb: 'Destinatarios' }
-      }
-    ] */
+      }*/
+    ]
   },
   // {
   //   path: 'admin', data: { title: "admin" },
@@ -30,7 +29,7 @@ const routes: Routes = [
   //   }]
   // },
   //{ path: 'login', data: { title: "Iniciar sesión" }, loadChildren: './login/login.module#LoginModule' },
-  //{ path: '**', redirectTo: 'inicio', pathMatch: 'full' },
+  { path: '**', redirectTo: 'buscar-persona', pathMatch: 'full' },
 ]
 
 @NgModule({

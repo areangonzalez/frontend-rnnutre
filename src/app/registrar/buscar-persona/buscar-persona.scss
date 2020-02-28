@@ -1,0 +1,16 @@
+.bp-centro {
+  max-width: 40rem;
+  min-width: 15rem;
+  margin: 10% auto;
+}
+.bp-border {
+  padding: 0.5rem 2rem 2.5rem 2rem;
+  border-radius: 0.5rem;
+  -moz-border-radius: 0.5rem;
+  -webkit-border-radius: 0.5rem;
+}
+.bp-shadow {
+  box-shadow: 0rem .25rem .25rem 0rem rgba(204,204,204,1);
+  -mox-box-shadow: 0rem .25rem .25rem 0rem rgba(204,204,204,1);
+  -wepkit-box-shadow: 0rem .25rem .25rem 0rem rgba(204,204,204,1);
+}

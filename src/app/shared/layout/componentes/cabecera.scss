@@ -1,0 +1,13 @@
+button {
+  i {
+    color: #036954 !important;
+    &:hover {
+      color: #ccff99 !important;
+    }
+  }
+}
+button.active {
+  i {
+    color: #ccff99 !important;
+  }
+}
