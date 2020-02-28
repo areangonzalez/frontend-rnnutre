@@ -1,0 +1,27 @@
+<fieldset>
+  <div class="row">
+    <div class="form-group col-md-4">
+      <label for="localidad">Localidad:</label>
+      <select class="form-control" id="localidad" >
+        <option value="">Seleccione Localidad</option>
+        <option value="1">Viedma</option>
+        <!-- formControlName="localidadid" [ngClass]="{'is-invalid': (lugar.get('localidadid').invalid && submitted)}"
+        <option *ngFor="let localidad of localidadLista" value="{{localidad.id}}">{{localidad.nombre}}</option> -->
+    </select>
+    </div>
+    <div class="form-group col-md-4">
+      <label for="calle">Calle:</label>
+      <input type="text" id="calle" placeholder="Ej.: Los pilates" class="form-control">
+    </div>
+    <div class="form-group col-md-4">
+      <label for="numero">N&uacute;mero:</label>
+      <input type="text" id="numero" placeholder="Ej.: 315" class="form-control">
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-md-12">
+      <label for="barrio">Barrio:</label>
+      <input type="text" id="barrio" placeholder="Ej.: Castello" class="form-control">
+    </div>
+  </div>
+</fieldset>
