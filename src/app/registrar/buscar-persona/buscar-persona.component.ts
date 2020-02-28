@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router} from '@angular/router';
-//import { AuthenticationService } from 'src/app/core/services';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'registrar-buscar-persona',
@@ -19,7 +18,7 @@ export class BuscarPersonaComponent implements OnInit {
     ngOnInit(){
     }
 
-    registrarPersona(){
-        this._router.navigate(['/registrar']);
+    registrarPersona() {
+      this._router.navigate(['buscar-persona', 'registrar-persona']);
     }
 }

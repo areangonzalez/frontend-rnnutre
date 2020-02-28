@@ -6,11 +6,12 @@ import { SharedModule } from "../shared";
 
 import { BuscarPersonaComponent } from "./buscar-persona";
 import { RegistrarRoutingModule } from './registrar-routing.module';
+import { RegistrarPersonaComponent } from './registrar-persona';
 
 // Metadatos del módulo
 @NgModule({
   declarations: [
-    BuscarPersonaComponent
+    BuscarPersonaComponent, RegistrarPersonaComponent
   ],
   imports: [
     CommonModule, NgbModule, SharedModule, RegistrarRoutingModule],

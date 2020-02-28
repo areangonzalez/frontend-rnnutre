@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from "@angular/router";
 
 import { CabeceraComponent } from './layout'
+import { PersonaComponent } from "./formularios";
 
 
 @NgModule({
@@ -18,10 +19,11 @@ import { CabeceraComponent } from './layout'
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [
-    CabeceraComponent
+    CabeceraComponent,
+    PersonaComponent
   ],
   exports: [
-    CommonModule, FormsModule, ReactiveFormsModule, HttpClientModule, RouterModule, CabeceraComponent
+    CommonModule, FormsModule, ReactiveFormsModule, HttpClientModule, RouterModule, CabeceraComponent, PersonaComponent
   ],
   entryComponents:[]
 })
