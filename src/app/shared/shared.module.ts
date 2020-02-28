@@ -6,7 +6,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from "@angular/router";
 
 import { CabeceraComponent } from './layout'
-import { PersonaComponent, ContactoComponent } from "./formularios";
+import { PersonaComponent, ContactoComponent, RedSocailFormComponent } from "./formularios";
+import { RedSocialComponent } from './listas';
 
 
 @NgModule({
@@ -20,10 +21,11 @@ import { PersonaComponent, ContactoComponent } from "./formularios";
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [
     CabeceraComponent,
-    PersonaComponent, ContactoComponent
+    PersonaComponent, ContactoComponent, RedSocailFormComponent,
+    RedSocialComponent
   ],
   exports: [
-    CommonModule, FormsModule, ReactiveFormsModule, HttpClientModule, RouterModule, CabeceraComponent, PersonaComponent, ContactoComponent
+    CommonModule, FormsModule, ReactiveFormsModule, HttpClientModule, RouterModule, CabeceraComponent, PersonaComponent, ContactoComponent, RedSocailFormComponent, RedSocialComponent
   ],
   entryComponents:[]
 })

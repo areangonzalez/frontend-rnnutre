@@ -1,0 +1,20 @@
+<ng-template #ayudaTipo>
+  <b>Tipo red social</b>
+ </ng-template>
+<ng-template #ayudaPerfil>
+<b>Perfil o URL:</b>
+<br>Ingrese nombre de perfil sin espacios.
+<br>Utilice . o - para separar.
+<br>Copie y pegue la URL del perfil.
+<br>La url debe de coincidir con el tipo de red social.
+</ng-template>
+<fieldset>
+  <div class="form-group input-group">
+    <select class="form-control input-group-prepend maximo-ancho" id="tipo_red_social" [ngbTooltip]="ayudaTipo" placement="top" container="body"> <!-- formControlName="tipo_red_socialid" [ngClass]="{'is-invalid': (redSocialForm.get('tipo_red_socialid').invalid && submitted)}" -->
+      <option value="">Seleccione tipo de red social</option>
+      <option value="1">Facebook</option>
+      <!-- <option *ngFor="let tipoRedSocial of tipoRedSocialLista" value="{{tipoRedSocial.id}}" >{{tipoRedSocial.nombre}}</option> -->
+    </select>
+    <input type="text" class="form-control border-radius-final" id="perfil" placeholder="Perfil Ej: https://wwww.facebook.com/anibal.fernandez o anibal.fernandez" [ngbTooltip]="ayudaPerfil" placement="bottom" container="body"> <!-- formControlName="perfil" [ngClass]="{'is-invalid': (redSocialForm.get('perfil').invalid && submitted)}" (keyup)="noEspacios($event.target)" -->
+</div>
+</fieldset>
