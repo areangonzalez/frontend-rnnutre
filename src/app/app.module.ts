@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { CoreModule } from "./core/core.module";
 import { AppLayoutComponent, SharedModule } from "./shared";
 
+
 @NgModule({
   declarations: [
     AppComponent,
