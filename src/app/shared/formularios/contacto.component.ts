@@ -5,8 +5,9 @@ import { Component, OnInit } from '@angular/core';
     templateUrl: './contacto.component.html'
 })
 export class ContactoComponent implements OnInit {
+  public state: string = 'small';
 
-    constructor(){}
+  constructor(){}
 
-    ngOnInit(){}
+  ngOnInit(){}
 }

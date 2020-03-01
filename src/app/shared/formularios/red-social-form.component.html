@@ -9,12 +9,18 @@
 <br>La url debe de coincidir con el tipo de red social.
 </ng-template>
 <fieldset>
-  <div class="form-group input-group">
-    <select class="form-control input-group-prepend maximo-ancho" id="tipo_red_social" [ngbTooltip]="ayudaTipo" placement="top" container="body"> <!-- formControlName="tipo_red_socialid" [ngClass]="{'is-invalid': (redSocialForm.get('tipo_red_socialid').invalid && submitted)}" -->
-      <option value="">Seleccione tipo de red social</option>
-      <option value="1">Facebook</option>
-      <!-- <option *ngFor="let tipoRedSocial of tipoRedSocialLista" value="{{tipoRedSocial.id}}" >{{tipoRedSocial.nombre}}</option> -->
-    </select>
-    <input type="text" class="form-control border-radius-final" id="perfil" placeholder="Perfil Ej: https://wwww.facebook.com/anibal.fernandez o anibal.fernandez" [ngbTooltip]="ayudaPerfil" placement="bottom" container="body"> <!-- formControlName="perfil" [ngClass]="{'is-invalid': (redSocialForm.get('perfil').invalid && submitted)}" (keyup)="noEspacios($event.target)" -->
-</div>
+  <div class="row">
+    <div class="form-group col-md-12">
+      <label for="tipo_red_social">Tipo Red Social:</label>
+      <select class="form-control" id="tipo_red_social" [ngbTooltip]="ayudaTipo" placement="top" container="body"> <!-- formControlName="tipo_red_socialid" [ngClass]="{'is-invalid': (redSocialForm.get('tipo_red_socialid').invalid && submitted)}" -->
+        <option value="">Seleccione tipo de red social</option>
+        <option value="1">Facebook</option>
+        <!-- <option *ngFor="let tipoRedSocial of tipoRedSocialLista" value="{{tipoRedSocial.id}}" >{{tipoRedSocial.nombre}}</option> -->
+      </select>
+    </div>
+    <div class="form-group col-md-12">
+      <label for="perfil">Perfil:</label>
+      <input type="text" class="form-control" id="perfil" placeholder="Ej: https://wwww.facebook.com/anibal.fernandez o anibal.fernandez" [ngbTooltip]="ayudaPerfil" placement="bottom" container="body"> <!-- formControlName="perfil" [ngClass]="{'is-invalid': (redSocialForm.get('perfil').invalid && submitted)}" (keyup)="noEspacios($event.target)" -->
+    </div>
+  </div>
 </fieldset>

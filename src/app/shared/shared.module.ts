@@ -8,6 +8,7 @@ import { RouterModule } from "@angular/router";
 import { CabeceraComponent } from './layout'
 import { PersonaComponent, ContactoComponent, RedSocailFormComponent, LugarComponent } from "./formularios";
 import { RedSocialComponent } from './listas';
+import { ModalRedSocialComponent, ModalRedSocialContent } from "./modal";
 
 
 @NgModule({
@@ -22,11 +23,14 @@ import { RedSocialComponent } from './listas';
   declarations: [
     CabeceraComponent,
     PersonaComponent, ContactoComponent, RedSocailFormComponent, LugarComponent,
-    RedSocialComponent
+    RedSocialComponent,
+    ModalRedSocialComponent, ModalRedSocialContent
   ],
   exports: [
-    CommonModule, FormsModule, ReactiveFormsModule, HttpClientModule, RouterModule, CabeceraComponent, PersonaComponent, ContactoComponent, RedSocailFormComponent, RedSocialComponent, LugarComponent
+    CommonModule, FormsModule, ReactiveFormsModule, HttpClientModule, RouterModule, CabeceraComponent, PersonaComponent, ContactoComponent, RedSocailFormComponent, RedSocialComponent, LugarComponent, ModalRedSocialComponent, ModalRedSocialContent
   ],
-  entryComponents:[]
+  entryComponents:[
+    ModalRedSocialComponent, ModalRedSocialContent
+  ]
 })
 export class SharedModule {}

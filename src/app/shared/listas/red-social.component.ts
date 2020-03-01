@@ -6,7 +6,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RedSocialComponent implements OnInit {
 
-    constructor(){}
+  constructor(){}
 
-    ngOnInit(){}
+  ngOnInit(){}
+
+
+
 }
