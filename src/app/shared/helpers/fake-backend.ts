@@ -11,32 +11,42 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         // array in local storage for registered users
         let users: any[] = JSON.parse(localStorage.getItem('users')) || [];
+        let personas = [
+          {id: 1, nro_documento: '29857364', nombre: 'Marcos', apellido: 'Gonzalez'},
+          {id: 2, nro_documento: '29232132', nombre: 'Pedro', apellido: 'Avila'}
+        ];
+        let beneficiario = [
+          { id: 1, personaid: 2 }
+        ];
 
         // wrap in delayed observable to simulate server api call
         return of(null).pipe(mergeMap(() => {
 
-            // authenticate
-            if (request.url.endsWith('/users/authenticate') && request.method === 'POST') {
-                // find if any user matches login credentials
-                let filteredUsers = users.filter(user => {
-                    return user.username === request.body.username && user.password === request.body.password;
-                });
+            // Buscar por documento - persona
+            if (request.url.match(/\/apimock\/personas\/buscar\-por\-documento\/\d+$/) && request.method === 'GET') {
+                // variables
+                let urlParts = request.url.split('/');
+                let nro_documento = urlParts[urlParts.length - 1];
+                let mensaje:string = 'Esta persona no existe.';
+                let personaRegistrada = false;
 
-                if (filteredUsers.length) {
-                    // if login details are valid return 200 OK with user details and fake jwt token
-                    let user = filteredUsers[0];
-                    let body = {
-                        id: user.id,
-                        username: user.username,
-                        firstName: user.firstName,
-                        lastName: user.lastName,
-                        token: 'fake-jwt-token'
-                    };
+                // busco si la persona se encuentra en registral.
+                let buscoPersona = personas.filter(persona => { return persona.nro_documento === nro_documento; });
+                let personaEncontrada = buscoPersona.length ? buscoPersona[0] : null;
 
-                    return of(new HttpResponse({ status: 200, body: body }));
+                if (personaEncontrada !== null) {
+                  // verifico si la persona esta registrada en programa
+                  let buscoPersonaEnprograma = beneficiario.filter(beneficiario => { return beneficiario.personaid === personaEncontrada.id; });
+                  personaRegistrada = buscoPersonaEnprograma.length ? true : false;
+                }else {
+                  return of(new HttpResponse({ status: 200, body: [] }));
+                }
+
+                if (!personaRegistrada){
+                  return of(new HttpResponse({ status: 200, body: personaEncontrada }));
                 } else {
-                    // else return 400 bad request
-                    return throwError({ error: { message: 'Username or password is incorrect' } });
+                  // else return 400 bad request
+                  return throwError({ error: { message: 'Esta persona ya esta registrada en el programa.' } });
                 }
             }
 
