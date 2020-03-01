@@ -6,7 +6,8 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 
 // fake backend provider
-import { fakeBackendProvider, ErrorInterceptor } from "./shared/helpers";
+import { fakeBackendProvider } from "./shared/helpers/fake-backend";
+import { ErrorInterceptor } from "./shared/helpers/error-interceptor";
 
 import { AppRoutingModule } from './app-routing.module';
 
