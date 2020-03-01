@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { TitleService } from "./services";
+import { TitleService, ApiService } from "./services";
 
 @NgModule({
   imports: [
     CommonModule,
   ],
   providers: [
-    TitleService
+    TitleService, ApiService
   ]
 })
 export class CoreModule {}

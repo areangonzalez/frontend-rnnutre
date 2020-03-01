@@ -2,9 +2,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+
 
 // fake backend provider
-import { fakeBackendProvider } from "./shared/helpers/fake-backend";
+import { fakeBackendProvider, ErrorInterceptor } from "./shared/helpers";
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -28,6 +30,8 @@ import { AppLayoutComponent, SharedModule } from "./shared";
     SharedModule,
   ],
   providers: [
+    /* { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }, */
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     // facke-backend providers
     fakeBackendProvider
   ],
