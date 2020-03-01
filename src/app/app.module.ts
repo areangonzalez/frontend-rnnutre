@@ -3,6 +3,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+// fake backend provider
+import { fakeBackendProvider } from "./shared/helpers/fake-backend";
+
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
@@ -24,7 +27,10 @@ import { AppLayoutComponent, SharedModule } from "./shared";
     CoreModule,
     SharedModule,
   ],
-  providers: [],
+  providers: [
+    // facke-backend providers
+    fakeBackendProvider
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
