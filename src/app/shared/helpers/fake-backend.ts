@@ -39,14 +39,15 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                   let buscoPersonaEnprograma = beneficiario.filter(beneficiario => { return beneficiario.personaid === personaEncontrada.id; });
                   personaRegistrada = buscoPersonaEnprograma.length ? true : false;
                 }else {
-                  return of(new HttpResponse({ status: 200, body: [] }));
+                  return of(new HttpResponse({ status: 200, body: {beneficiario: false} }));
                 }
 
                 if (!personaRegistrada){
+                  personaEncontrada["beneficiario"] = personaRegistrada;
                   return of(new HttpResponse({ status: 200, body: personaEncontrada }));
                 } else {
                   // else return 400 bad request
-                  return throwError({ error: { message: 'Esta persona ya esta registrada en el programa.' } });
+                  return of(new HttpResponse({ status: 200, body: { beneficiario: personaRegistrada } }));
                 }
             }
 

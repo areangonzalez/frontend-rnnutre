@@ -8,7 +8,7 @@ const routes: Routes = [
     path: '', component: BuscarPersonaComponent, data: { title: 'Buscar Persona' }
   },
   {
-    path: 'registrar-persona', component: RegistrarPersonaComponent, data: { title: 'Registrar Persona' }
+    path: 'registrar-persona/:documento', component: RegistrarPersonaComponent, data: { title: 'Registrar Persona' }
   }
 ]
 

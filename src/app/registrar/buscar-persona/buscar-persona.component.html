@@ -3,17 +3,25 @@
     <h3>Buscar persona</h3>
     <fieldset [formGroup]="buscarForm">
       <div class="input-group">
-        <input class="form-control" type="text" placeholder="Ingrese número de documento" formControlName="nro_documento">
+        <input class="form-control" type="text" placeholder="Ingrese número de documento" formControlName="nro_documento" [ngClass]="{'is-invalid': (buscarForm.get('nro_documento').invalid && submited)}">
         <div class="input-group-append">
           <button type="button" class="btn btn-outline-secondary" (click)="buscarPersona()"><i class="fas fa-search"></i></button>
         </div>
       </div>
     </fieldset>
   </div>
-  <div class="d-flex justify-content-center mt-4">
-    <!-- <div class="alert alert-danger bp-shadow">
+  <div *ngIf="(buscarForm.get('nro_documento').invalid && submited)" class="d-flex justify-content-center mt-4">
+    <div *ngIf="(buscarForm.get('nro_documento').hasError('required'))" class="alert alert-danger bp-shadow">
+      <i class="far fa-times-circle"></i> Por favor ingrese un número de documento.
+    </div>
+    <div *ngIf="(buscarForm.get('nro_documento').hasError('minlength'))" class="alert alert-danger bp-shadow">
+      <i class="far fa-times-circle"></i> El número de documento debe de tener al menos 7 digitos.
+    </div>
+  </div>
+  <div *ngIf="(nroDocumentoBuscado == buscarForm.get('nro_documento').value && nroDocumentoBuscado !== '')" class="d-flex justify-content-center mt-3">
+    <div *ngIf="(esBeneficiario)" class="alert alert-danger bp-shadow">
       <i class="far fa-times-circle"></i> Esta persona ya ha sido registrada.
-    </div> -->
-    <button type="button" class="btn btn-primary btn-block bp-shadow" (click)="registrarPersona()">Registrar</button>
+    </div>
+    <button *ngIf="(!esBeneficiario)" type="button" class="btn btn-primary btn-block bp-shadow" (click)="registrarPersona()">Registrar</button>
   </div>
 </div>

@@ -9,8 +9,11 @@ import { PersonaService } from 'src/app/core/services';
     styleUrls: ['./buscar-persona.scss']
 })
 export class BuscarPersonaComponent implements OnInit {
-    public isCollapsed = true;
+    public submited = false;
     public buscarForm: FormGroup;
+    public esBeneficiario: boolean = true;
+    public respObtenida: boolean = false;
+    public nroDocumentoBuscado = '';
 
     constructor(
        private _router: Router,
@@ -30,16 +33,23 @@ export class BuscarPersonaComponent implements OnInit {
      */
     buscarPersona() {
       let nroDocumento = this.buscarForm.get('nro_documento').value;
-      // aplico el servicio para buscar a la persona por documento
-      this._personaService.personaPorNroDocumento(nroDocumento).subscribe(
-        respuesta => {
-          console.log(respuesta);
-        }, error  => {
-          console.log(error);
-        })
+
+      this.submited = true;
+      if (this.buscarForm.invalid) {
+        return;
+      }else{
+        // aplico el servicio para buscar a la persona por documento
+        this._personaService.personaPorNroDocumento(nroDocumento).subscribe(
+          respuesta => {
+            this.nroDocumentoBuscado = nroDocumento;
+            this.esBeneficiario = respuesta['beneficiario'];
+          }, error  => {
+            console.log(error);
+          });
+        }
     }
     // me dirijo a registrar una persona no registrada
     registrarPersona() {
-      this._router.navigate(['buscar-persona', 'registrar-persona']);
+      this._router.navigate(['buscar-persona', 'registrar-persona', this.buscarForm.get('nro_documento').value]);
     }
 }
