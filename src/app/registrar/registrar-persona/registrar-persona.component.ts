@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute} from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PersonaService } from 'src/app/core/services';
-import { map } from "rxjs/operators";
+import { PersonaModel } from 'src/app/core/models';
 
 @Component({
     selector: 'registrar-persona',
@@ -15,6 +15,7 @@ export class RegistrarPersonaComponent implements OnInit {
     public submited: boolean = false;
     public listaRedSocial = [];
     public listaLocalidad = [];
+    public personaModel = new PersonaModel();
 
     constructor(
       private _router: Router,
@@ -23,6 +24,7 @@ export class RegistrarPersonaComponent implements OnInit {
       private _personaService: PersonaService
     ){
       this.beneficiarioForm = _fb.group({
+        id:'',
         nro_documento: ['', [Validators.required, Validators.minLength(7)]],
         nombre: ['', [Validators.required, Validators.minLength(3)]],
         apellido: ['', [Validators.required, Validators.minLength(3)]],
@@ -87,7 +89,9 @@ export class RegistrarPersonaComponent implements OnInit {
       if(this.beneficiarioForm.invalid){
         return;
       } else {
-        const params = {};
+        let persona = this.personaModel.deserealize(this.beneficiarioForm.value);
+        Object.assign(persona, {'lista_red_social': this.listaRedSocial});
+        console.log(persona);
 
         console.log("guardado con exito!!");
       }
