@@ -26,7 +26,7 @@ export class RegistrarPersonaComponent implements OnInit {
         nro_documento: ['', [Validators.required, Validators.minLength(7)]],
         nombre: ['', [Validators.required, Validators.minLength(3)]],
         apellido: ['', [Validators.required, Validators.minLength(3)]],
-        cantidad_hijo: ['', Validators.required],
+        cantidad_hijo: ['', [Validators.required, Validators.min(0)]],
         edad_por_hijo: ['', Validators.required],
         contacto: _fb.group({
           telefono: '',
@@ -89,7 +89,7 @@ export class RegistrarPersonaComponent implements OnInit {
       } else {
         const params = {};
 
-
+        console.log("guardado con exito!!");
       }
     }
 }

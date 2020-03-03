@@ -7,20 +7,40 @@
     <div class="form-group col-md-4">
       <label for="apellido">Apellido <i class="fas fa-asterisk text-danger"></i>:</label>
       <input type="text" id="apellido" formControlName="apellido" placeholder="Ej.: Raul" class="form-control" [ngClass]="{'is-invalid': (persona.get('apellido').invalid && submited)}">
+
+      <div *ngIf="(persona.get('apellido').invalid && submited)"
+          class="text-danger">
+        <div *ngIf="persona.get('apellido').hasError('required')">Por favor ingrese un apellido.</div>
+        <div *ngIf="persona.get('apellido').hasError('minlength')">El apellido es muy corto.</div>
+      </div>
     </div>
     <div class="form-group col-md-4">
       <label for="nombre">Nombre <i class="fas fa-asterisk text-danger"></i>:</label>
       <input type="text" id="nombre" formControlName="nombre" placeholder="Ej.: Pérez" class="form-control" [ngClass]="{'is-invalid': (persona.get('nombre').invalid && submited)}">
+      <div *ngIf="(persona.get('nombre').invalid && submited)"
+          class="text-danger">
+        <div *ngIf="persona.get('nombre').hasError('required')">Por favor ingrese un nombre. </div>
+        <div *ngIf="persona.get('nombre').hasError('minlength')">El nombre es muy corto. </div>
+      </div>
     </div>
   </div>
   <div class="row">
     <div class="form-group col-md-4">
       <label for="cant_hijos">Cantidad de hijos <i class="fas fa-asterisk text-danger"></i>:</label>
-      <input type="text" id="cant_hijos" formControlName="cantidad_hijo" placeholder="Ej.: 5" class="form-control" [ngClass]="{'is-invalid': (persona.get('cantidad_hijo').invalid && submited)}">
+      <input type="number" id="cant_hijos" formControlName="cantidad_hijo" placeholder="Ej.: 5" class="form-control" [ngClass]="{'is-invalid': (persona.get('cantidad_hijo').invalid && submited)}" min="0">
+      <div *ngIf="(persona.get('cantidad_hijo').invalid && submited)"
+          class="text-danger">
+        <div *ngIf="persona.get('cantidad_hijo').hasError('required')">Por favor ingrese un número para especificar la cantidad. </div>
+        <div *ngIf="persona.get('cantidad_hijo').hasError('min')">La cantidad no puede ser menor a cero. </div>
+      </div>
     </div>
     <div class="form-group col-md-8">
       <label for="edades">Edades <i class="fas fa-asterisk text-danger"></i>:</label>
       <input type="text" id="edades" formControlName="edad_por_hijo" placeholder="Ej.: 13, 16, 25" class="form-control" [ngClass]="{'is-invalid': (persona.get('edad_por_hijo').invalid && submited)}">
+      <div *ngIf="(persona.get('edad_por_hijo').invalid && submited)"
+          class="text-danger">
+        <div *ngIf="persona.get('edad_por_hijo').hasError('required')">Por favor ingrese la/s edad/es del/los hijo/s. </div>
+      </div>
     </div>
   </div>
 </fieldset>

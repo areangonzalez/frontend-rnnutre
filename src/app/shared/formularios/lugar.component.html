@@ -5,21 +5,37 @@
       <select class="form-control" id="localidad" formControlName="localidadid" [ngClass]="{'is-invalid': (lugar.get('localidadid').invalid && submited)}">
         <option value="">Seleccione Localidad</option>
         <option *ngFor="let localidad of listaLocalidades" value="{{localidad.id}}">{{localidad.nombre}}</option>
-    </select>
+      </select>
+      <div *ngIf="(lugar.get('localidadid').invalid && submited)"
+            class="text-danger">
+        <div *ngIf="lugar.get('localidadid').hasError('required')">Por favor seleccione una localidad. </div>
+      </div>
     </div>
     <div class="form-group col-md-4">
       <label for="calle">Calle <i class="fas fa-asterisk text-danger"></i>:</label>
       <input type="text" id="calle" formControlName="calle" placeholder="Ej.: Los pilates" class="form-control" [ngClass]="{'is-invalid': (lugar.get('calle').invalid && submited)}">
+      <div *ngIf="(lugar.get('calle').invalid && submited)"
+            class="text-danger">
+        <div *ngIf="lugar.get('calle').hasError('required')">Por favor ingrese una calle. </div>
+      </div>
     </div>
     <div class="form-group col-md-4">
       <label for="numero">N&uacute;mero <i class="fas fa-asterisk text-danger"></i>:</label>
       <input type="text" id="numero" formControlName="altura" placeholder="Ej.: 315" class="form-control" [ngClass]="{'is-invalid': (lugar.get('altura').invalid && submited)}">
+      <div *ngIf="(lugar.get('altura').invalid && submited)"
+            class="text-danger">
+        <div *ngIf="lugar.get('altura').hasError('required')">Por favor ingrese un número. </div>
+      </div>
     </div>
   </div>
   <div class="row">
     <div class="form-group col-md-12">
       <label for="barrio">Barrio <i class="fas fa-asterisk text-danger"></i>:</label>
       <input type="text" id="barrio" formControlName="barrio" placeholder="Ej.: Castello" class="form-control" [ngClass]="{'is-invalid': (lugar.get('barrio').invalid && submited)}">
+      <div *ngIf="(lugar.get('barrio').invalid && submited)"
+            class="text-danger">
+        <div *ngIf="lugar.get('barrio').hasError('required')">Por favor ingrese un barrio. </div>
+      </div>
     </div>
   </div>
 </fieldset>
