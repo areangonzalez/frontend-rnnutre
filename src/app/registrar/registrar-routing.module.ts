@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { BuscarPersonaComponent } from './buscar-persona';
 import { RegistrarPersonaComponent } from './registrar-persona';
-import { PersonaService } from '../core/services';
+import { PersonaService, LocalidadService } from '../core/services';
 
 const routes: Routes = [
   {
@@ -10,13 +10,13 @@ const routes: Routes = [
   },
   {
     path: 'registrar-persona/:documento', component: RegistrarPersonaComponent, data: { title: 'Registrar Persona' },
-    resolve: { persona: PersonaService }
+    resolve: { persona: PersonaService, localidad: LocalidadService }
   }
 ]
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: [PersonaService]
+  providers: [PersonaService, LocalidadService]
 })
 export class RegistrarRoutingModule { }

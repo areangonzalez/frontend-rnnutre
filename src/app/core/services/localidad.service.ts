@@ -5,20 +5,19 @@ import { Observable } from 'rxjs';
 
 
 @Injectable()
-export class PersonaService {
+export class LocalidadService {
 
     constructor(private _apiService: ApiService) { }
 
-    personaPorNroDocumento(nro_documento: string) {
-        return this._apiService.get('/personas/buscar-por-documento/' + nro_documento);
+    lista() {
+        return this._apiService.get('/localidads');
     }
 
     resolve(
       route: ActivatedRouteSnapshot,
       state: RouterStateSnapshot,
       ): Observable<any>|Promise<any>|any {
-        let nro_documento = route.params.documento;
-        return this._apiService.get('/personas/buscar-por-documento/' + nro_documento);
+        return this._apiService.get('/localidads');
       }
 
 }

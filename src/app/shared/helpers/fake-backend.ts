@@ -23,7 +23,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
           {"id": 2, "nombre": "Instagram", "icono_class": "fab fa-instagram", "url_1": "https://www.instagram.com/" },
           {"id": 3, "nombre": "Linkedin", "icono_class": "fab fa-twitter", "url_1": "https://www.linkedin.com/in/" },
           {"id": 4, "nombre": "Twitter", "icono_class": "fab fa-linkedin-in", "url_1": "https://twitter.com/" }
-        ]
+        ];
+        let localidades = [
+          { "id": 1, "nombre": "Aguada de Guerra" }, { "id": 2, "nombre": "Bariloche" }, { "id": 3, "nombre": "Choele Choel" }, { "id": 4, "nombre": "Cinco Saltos" }, { "id": 5, "nombre": "Cipolletti" }, { "id": 6, "nombre": "Coronel Belisle" }, { "id": 7, "nombre": "General Roca" }, { "id": 8, "nombre": "Río colorado" }, { "id": 9, "nombre": "Viedma" }, { "id": 10, "nombre": "Villa Regina" }
+        ];
 
         // wrap in delayed observable to simulate server api call
         return of(null).pipe(mergeMap(() => {
@@ -58,9 +61,11 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             }
             /* Tipo red social get */
             if (request.url.endsWith('/apimock/tipo-red-socials') && request.method === 'GET') {
-
               return of(new HttpResponse({ status: 200, body: tipoRedSocial }));
-
+            }
+            // get localidades
+            if (request.url.endsWith('/apimock/localidads') && request.method === 'GET') {
+                  return of(new HttpResponse({ status: 200, body: localidades }));
             }
 
             // get users

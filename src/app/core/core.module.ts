@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import {
-  TitleService, ApiService, PersonaService, UtilService, TipoRedSocialService
+  TitleService, ApiService, PersonaService, UtilService, TipoRedSocialService,
+  LocalidadService
 } from "./services";
 
 @NgModule({
@@ -10,7 +11,8 @@ import {
     CommonModule,
   ],
   providers: [
-    TitleService, ApiService, PersonaService, UtilService, TipoRedSocialService
+    TitleService, ApiService, PersonaService, UtilService, TipoRedSocialService,
+    LocalidadService
   ]
 })
 export class CoreModule {}

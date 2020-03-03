@@ -14,6 +14,7 @@ export class RegistrarPersonaComponent implements OnInit {
     public beneficiarioForm: FormGroup;
     private documento = '';
     public listaRedSocial = [];
+    public listaLocalidad = [];
 
     constructor(
       private _router: Router,
@@ -42,6 +43,7 @@ export class RegistrarPersonaComponent implements OnInit {
     }
 
     ngOnInit(){
+      this.listaLocalidad = this._route.snapshot.data['localidad'];
       this.configPersona(this._route.snapshot.data['persona'], this._route.snapshot.paramMap.get('documento'));
     }
 
