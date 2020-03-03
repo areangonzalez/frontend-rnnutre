@@ -3,7 +3,7 @@
     <h3>Buscar persona</h3>
     <fieldset [formGroup]="buscarForm">
       <div class="input-group">
-        <input class="form-control" type="text" placeholder="Ingrese número de documento" formControlName="nro_documento" [ngClass]="{'is-invalid': (buscarForm.get('nro_documento').invalid && submited)}">
+        <input class="form-control" type="text" placeholder="Ingrese número de documento" formControlName="nro_documento" (keyup)="soloNumero($event.target)" [ngClass]="{'is-invalid': (buscarForm.get('nro_documento').invalid && submited)}">
         <div class="input-group-append">
           <button type="button" class="btn btn-outline-secondary" (click)="buscarPersona()"><i class="fas fa-search"></i></button>
         </div>
