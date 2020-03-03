@@ -1,5 +1,5 @@
 
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SharedModule } from "../shared";
@@ -15,7 +15,7 @@ import { RegistrarPersonaComponent } from './registrar-persona';
   ],
   imports: [
     CommonModule, NgbModule, SharedModule, RegistrarRoutingModule],
-  schemas: [],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [
   ]
 

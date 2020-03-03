@@ -1,6 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { NgbActiveModal, NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
-/* import { ModalConfig, BotonDisenio } from 'src/app/core/models'; */
 
 
 @Component({
@@ -40,7 +39,7 @@ export class ModalRedSocialContent {
   providers: [NgbModalConfig, NgbModal]
 })
 export class ModalRedSocialComponent {
-  /* @Output("obtenerRedSocial") public obtenerRedSocial = new EventEmitter(); */
+  @Output("obtenerRedSocial") public obtenerRedSocial = new EventEmitter();
 
   constructor(
     private modalService: NgbModal,
@@ -52,7 +51,7 @@ export class ModalRedSocialComponent {
 
   open() {
     const modalRef = this.modalService.open(ModalRedSocialContent, { size: 'sm' });
-    /* modalRef.result.then(
+    modalRef.result.then(
       (result) => {
         if (result == 'closed'){
         }else{
@@ -60,6 +59,6 @@ export class ModalRedSocialComponent {
           return this.obtenerRedSocial.emit(result);
         }
       }
-    ) */
+    )
   }
 }

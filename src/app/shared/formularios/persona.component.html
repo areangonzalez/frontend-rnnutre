@@ -1,26 +1,26 @@
-<fieldset>
+<fieldset [formGroup]="persona">
   <div class="row">
     <div class="form-group col-md-4">
       <label for="nro_documento">Nro Documento:</label>
-      <input type="text" id="nro_documento" placeholder="Ej.: 23456367" class="form-control">
+      <input type="text" id="nro_documento" disabled="disabled" value="{{documento}}" placeholder="Ej.: 23456367" class="form-control">
     </div>
     <div class="form-group col-md-4">
       <label for="apellido">Apellido:</label>
-      <input type="text" id="apellido" placeholder="Ej.: Raul" class="form-control">
+      <input type="text" id="apellido" formControlName="apellido" placeholder="Ej.: Raul" class="form-control">
     </div>
     <div class="form-group col-md-4">
       <label for="nombre">Nombre:</label>
-      <input type="text" id="nombre" placeholder="Ej.: Pérez" class="form-control">
+      <input type="text" id="nombre" formControlName="nombre" placeholder="Ej.: Pérez" class="form-control">
     </div>
   </div>
   <div class="row">
     <div class="form-group col-md-4">
       <label for="cant_hijos">Cantidad de hijos:</label>
-      <input type="text" id="cant_hijos" placeholder="Ej.: 5" class="form-control">
+      <input type="text" id="cant_hijos" formControlName="cantidad_hijo" placeholder="Ej.: 5" class="form-control">
     </div>
     <div class="form-group col-md-8">
       <label for="edades">Edades:</label>
-      <input type="text" id="edades" placeholder="Ej.: 13, 16, 25" class="form-control">
+      <input type="text" id="edades" formControlName="edad_por_hijo" placeholder="Ej.: 13, 16, 25" class="form-control">
     </div>
   </div>
 </fieldset>

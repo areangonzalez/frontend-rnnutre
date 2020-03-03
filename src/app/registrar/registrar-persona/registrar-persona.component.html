@@ -2,11 +2,12 @@
   <div class="d-flex justify-content-center">
     <h4>Datos de la persona</h4>
   </div>
-  <formulario-persona ></formulario-persona>
+  {{ beneficiarioForm.controls.value }}
+  <formulario-persona [persona]="beneficiarioForm" [documento]="beneficiarioForm.get('nro_documento').value"></formulario-persona>
   <div class="d-flex justify-content-center">
     <h4>Contacto</h4>
   </div>
-  <formulario-contacto></formulario-contacto>
+  <formulario-contacto [contacto]="beneficiarioForm.get('contacto')" [listaRedSocial]="listaRedSocial" ></formulario-contacto>
   <div class="d-flex justify-content-center">
     <h4>Direcci&oacute;n</h4>
   </div>

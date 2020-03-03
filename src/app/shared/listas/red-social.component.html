@@ -1,35 +1,28 @@
-<table class="table table-hover table-sm">
-  <thead>
-    <th scope="col">Perfil</th>
-    <th scope="col">Tipo Red Social</th>
-    <th scope="col">Icono</th>
-    <th scope="col" class="text-center">
-        <!-- <modal-red-social-component (obtenerRedSocial)="agregarRedSocial($event)"></modal-red-social-component> -->
-    </th>
-  </thead>
-  <tbody>
-    <tr>
-      <td scope="col">nombre de prefil</td>
-      <td scope="col">nombre red social</td>
-      <td scope="col"><i class="fab fa-facebook"></i></td>
-      <td scope="col">
-        <button type="button" class="btn btn-sm btn-outline-danger"><i class="far fa-trash-alt"></i></button>
-      </td>
-    </tr>
-  </tbody>
-  <!-- <tbody *ngIf="(listadoRedSocial.length == 0)">
-    <tr>
-      <td rowspan="1" colspan="4" class="text-center"><h5>No tiene redes sociales</h5></td>
-    </tr>
-  </tbody>
-  <tbody *ngIf="(listadoRedSocial.length > 0)">
-    <tr *ngFor="let redsocial of listadoRedSocial; let i = index">
-      <td scope="col"><a href="{{redsocial.perfil}}" target="_blank">{{redsocial.perfil}}</a></td>
-      <td scope="col">{{redsocial.tipo_red_social}}</td>
-      <td scope="col">
-          <button class="btn btn-sm btn-light" ><i class="{{redsocial.icono_class}}"></i></button>
-      </td>
-      <td scope="col" class="text-center"><modal-borrar-red-social-component (borrarRedSocial)="borrar(i,$event)" ></modal-borrar-red-social-component></td>
-    </tr>
-  </tbody> -->
-</table>
+<div class="col-md-12 d-flex justify-content-center mb-3">
+  <abrir-modal-red-social (obtenerRedSocial)="agregarRedSocial($event)"></abrir-modal-red-social>
+</div>
+<div class="col-md-12">
+  <table class="table table-hover table-sm">
+    <thead>
+      <th scope="col">Perfil</th>
+      <th scope="col">Tipo Red Social</th>
+      <th scope="col">Icono</th>
+      <th scope="col" class="text-center"></th>
+    </thead>
+    <tbody *ngIf="(listadoRedSocial.length == 0)">
+      <tr>
+        <td rowspan="1" colspan="4" class="text-center"><h5>No tiene redes sociales</h5></td>
+      </tr>
+    </tbody>
+    <tbody *ngIf="(listadoRedSocial.length > 0)">
+      <tr *ngFor="let redsocial of listadoRedSocial; let i = index">
+        <td scope="col"><a href="{{redsocial.perfil}}" target="_blank">{{redsocial.perfil}}</a></td>
+        <td scope="col">{{redsocial.tipo_red_social}}</td>
+        <td scope="col">
+            <button class="btn btn-sm btn-light" ><i class="{{redsocial.icono_class}}"></i></button>
+        </td>
+        <td scope="col" class="text-center"><borrar-red-social-component (borrarRedSocial)="borrar(i,$event)" ></borrar-red-social-component></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

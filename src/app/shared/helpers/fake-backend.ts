@@ -18,6 +18,12 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         let beneficiario = [
           { id: 1, personaid: 2 }
         ];
+        let tipoRedSocial = [
+          {"id": 1, "nombre": "Facebook", "icono_class": "fab fa-facebook-square", "url_1": "https://www.facebook.com/" },
+          {"id": 2, "nombre": "Instagram", "icono_class": "fab fa-instagram", "url_1": "https://www.instagram.com/" },
+          {"id": 3, "nombre": "Linkedin", "icono_class": "fab fa-twitter", "url_1": "https://www.linkedin.com/in/" },
+          {"id": 4, "nombre": "Twitter", "icono_class": "fab fa-linkedin-in", "url_1": "https://twitter.com/" }
+        ]
 
         // wrap in delayed observable to simulate server api call
         return of(null).pipe(mergeMap(() => {
@@ -49,6 +55,12 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                   // else return 400 bad request
                   return of(new HttpResponse({ status: 200, body: { beneficiario: personaRegistrada } }));
                 }
+            }
+            /* Tipo red social get */
+            if (request.url.endsWith('/apimock/tipo-red-socials') && request.method === 'GET') {
+
+              return of(new HttpResponse({ status: 200, body: tipoRedSocial }));
+
             }
 
             // get users
