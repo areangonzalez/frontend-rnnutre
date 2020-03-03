@@ -1,16 +1,24 @@
 <div class="rp-formulario rounded bg-white mt-3">
+  <div class="d-flex justify-content-end">
+    <span><i class="fas fa-asterisk text-danger"></i> Campos Obligatorios.</span>
+  </div>
   <div class="d-flex justify-content-center">
     <h4>Datos de la persona</h4>
   </div>
-  {{ beneficiarioForm.controls.value }}
-  <formulario-persona [persona]="beneficiarioForm" [documento]="beneficiarioForm.get('nro_documento').value"></formulario-persona>
+  <formulario-persona [persona]="beneficiarioForm" [documento]="beneficiarioForm.get('nro_documento').value" [submited]="submited"></formulario-persona>
   <div class="d-flex justify-content-center">
     <h4>Contacto</h4>
   </div>
-  <formulario-contacto [contacto]="beneficiarioForm.get('contacto')" [listaRedSocial]="listaRedSocial" ></formulario-contacto>
+  <formulario-contacto [contacto]="beneficiarioForm.get('contacto')" [listaRedSocial]="listaRedSocial" [submited]="submited" ></formulario-contacto>
   <div class="d-flex justify-content-center">
     <h4>Direcci&oacute;n</h4>
   </div>
-  <formulario-lugar [lugar]="beneficiarioForm.get('lugar')" [localidades]="listaLocalidad"></formulario-lugar>
+  <formulario-lugar [lugar]="beneficiarioForm.get('lugar')" [localidades]="listaLocalidad" [submited]="submited"></formulario-lugar>
+
+  <hr class="pt1">
+  <div class="d-flex justify-content-between">
+    <button type="button" class="btn btn-danger" (click)="cancelar()"><i class="fa fa-ban" title="Cancelar"></i> Cancelar</button>
+    <button type="button" class="btn btn-success" (click)="validar()"><i class="fa fa-save" title="Guardar"></i> Guardar</button>
+  </div>
 </div>
 

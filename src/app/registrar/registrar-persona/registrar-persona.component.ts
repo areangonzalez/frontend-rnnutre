@@ -12,7 +12,7 @@ import { map } from "rxjs/operators";
 export class RegistrarPersonaComponent implements OnInit {
     public isCollapsed = true;
     public beneficiarioForm: FormGroup;
-    private documento = '';
+    public submited: boolean = false;
     public listaRedSocial = [];
     public listaLocalidad = [];
 
@@ -26,8 +26,8 @@ export class RegistrarPersonaComponent implements OnInit {
         nro_documento: ['', [Validators.required, Validators.minLength(7)]],
         nombre: ['', [Validators.required, Validators.minLength(3)]],
         apellido: ['', [Validators.required, Validators.minLength(3)]],
-        cantidad_hijo: '',
-        edad_por_hijo: '',
+        cantidad_hijo: ['', Validators.required],
+        edad_por_hijo: ['', Validators.required],
         contacto: _fb.group({
           telefono: '',
           celular: '',
@@ -73,8 +73,23 @@ export class RegistrarPersonaComponent implements OnInit {
 
 
     }
+    /**
+     * Cancelo la creacion de un beneficiario
+     */
+    cancelar() {
+      this._router.navigate(['/']);
+    }
+    /**
+     * Valido el formulario antes de enviar los datos
+     */
+    validar() {
+      this.submited = true;
+      if(this.beneficiarioForm.invalid){
+        return;
+      } else {
+        const params = {};
 
-    /* registrarPersona(){
-        this._router.navigate(['/registrar']);
-    } */
+
+      }
+    }
 }
