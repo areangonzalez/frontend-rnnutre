@@ -107,7 +107,6 @@ export class RegistrarPersonaComponent implements OnInit {
         if (parseInt(this.listaLocalidad[i]["id"]) == parseInt(idLocalidad) ) {
           return this.listaLocalidad[i]["nombre"];
         }
-
       }
     }
 }
