@@ -2,8 +2,8 @@
   <div class="col-md-12 ">
     <div class="card">
       <div class="card-body">
-        <div class="d-flex justify-content-between">
-          <h5 class="d-flex align-items-center">Datos personales</h5>
+        <div class="d-flex justify-content-center">
+          <h5>Datos personales</h5>
         </div>
         <div class="row">
           <div class="col-md-4">
@@ -11,12 +11,71 @@
               <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Nro. Documento:</dt>
               <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{datosPersona.nro_documento}}</dd>
             </dl>
+          </div>
+          <div class="col-md-4">
             <dl class="row">
                 <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Apellido y nombre:</dt>
                 <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{datosPersona.apellido}}, {{datosPersona.nombre}}</dd>
             </dl>
           </div>
+          <div class="col-md-4">
+            <dl class="row">
+                <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Cantidad de hijo/s:</dt>
+                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{datosPersona.cantidad_hijo}} (Edades: {{ datosPersona.edad_por_hijo }}  )</dd>
+            </dl>
+          </div>
+        </div>
+        <div class="d-flex justify-content-center">
+          <h5>Dirección</h5>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <dl class="row">
+              <dt class="col-6 col-sm-6 col-md-6 col-lg-6">localidad:</dt>
+              <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{datosPersona.lugar.localidad}}</dd>
+            </dl>
+          </div>
+          <div class="col-md-4">
+            <dl class="row">
+                <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Dirección:</dt>
+                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{datosPersona.lugar.calle}}, {{datosPersona.lugar.altura}}</dd>
+            </dl>
+          </div>
+          <div class="col-md-4">
+            <dl class="row">
+                <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Barrio:</dt>
+                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{datosPersona.lugar.barrio}}</dd>
+            </dl>
+          </div>
+        </div>
+        <div class="d-flex justify-content-center">
+          <h5>Contacto</h5>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <dl class="row">
+              <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Teléfono:</dt>
+              <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{datosPersona.telefono}}</dd>
+            </dl>
+          </div>
+          <div class="col-md-4">
+            <dl class="row">
+                <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Celular:</dt>
+                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{datosPersona.celular}}</dd>
+            </dl>
+          </div>
+          <div class="col-md-4">
+            <dl class="row">
+                <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Correo Electrónico:</dt>
+                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{datosPersona.email}}</dd>
+            </dl>
+          </div>
           <div class="col-md-12">
+            <lista-red-social [redesSociales]="datosPersona.lista_red_social" [mostrarBotones]="false"></lista-red-social>
+          </div>
+        </div>
+        <div class="row">
+          <!-- <div class="col-md-12">
             <div class="d-flex justify-content-center">
               <div class="btn-group">
                 <ng-template #direccionContent>
@@ -42,7 +101,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>

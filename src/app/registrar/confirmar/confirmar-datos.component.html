@@ -1,14 +1,14 @@
 <div class="rounded bg-white">
   <div class="d-flex justify-content-center pt-2">
-    <h2>Confirmar Datos de la Persona</h2>
+    <h2>Confirmación de Datos</h2>
   </div>
-  {{datosPersona | json}}
   <div class="p-2">
     <vista-datos-persona [datosPersona]="datosPersona"></vista-datos-persona>
   </div>
   <hr class="pt1">
   <div class="d-flex justify-content-between p-2">
-    <button type="button" class="btn btn-danger"><i class="fa fa-ban"></i> Cancelar</button>
-    <button type="button" class="btn btn-success"><i class="fa fa-check-circle"></i> Confirmar</button>
+    <button type="button" class="btn btn-danger" (click)="cancelar()"><i class="fa fa-ban"></i> Cancelar</button>
+    <button type="button" class="btn btn-light" (click)="editar()"><i class="fa fa-pencil-alt"></i> Editar</button>
+    <button type="button" class="btn btn-success" (click)="confirmar()"><i class="fa fa-check-circle"></i> Confirmar</button>
   </div>
 </div>

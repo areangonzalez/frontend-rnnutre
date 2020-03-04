@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'confirmar-datos',
@@ -6,8 +7,19 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ConfirmarDatosComponent implements OnInit {
     public datosPersona = JSON.parse(localStorage.getItem('datosPersona'));
-    constructor(){}
+
+    constructor( private _router: Router ){}
 
     ngOnInit(){}
+
+    confirmar() {
+
+    }
+    /**
+     * Vuelvo al formulario para editar los datos
+     */
+    editar() {
+      this._router.navigate(['buscar-persona', 'registrar-persona', this.datosPersona.nro_documento]);
+    }
 
 }

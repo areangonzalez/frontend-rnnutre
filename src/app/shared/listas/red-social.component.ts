@@ -6,6 +6,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class RedSocialComponent implements OnInit {
   @Input("redesSociales") public listadoRedSocial: any;
+  @Input("mostrarBotones") public mostrarBoton: boolean;
   constructor(){}
 
   ngOnInit(){}

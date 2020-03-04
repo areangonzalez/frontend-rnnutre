@@ -1,4 +1,4 @@
-<div class="col-md-12 d-flex justify-content-center mb-3">
+<div *ngIf="mostrarBoton" class="col-md-12 d-flex justify-content-center mb-3">
   <abrir-modal-red-social (obtenerRedSocial)="agregarRedSocial($event)"></abrir-modal-red-social>
 </div>
 <div class="col-md-12">
@@ -7,7 +7,7 @@
       <th scope="col">Perfil</th>
       <th scope="col">Tipo Red Social</th>
       <th scope="col">Icono</th>
-      <th scope="col" class="text-center"></th>
+      <th *ngIf="mostrarBoton" scope="col" class="text-center"></th>
     </thead>
     <tbody *ngIf="(listadoRedSocial.length == 0)">
       <tr>
@@ -21,7 +21,7 @@
         <td scope="col">
             <button class="btn btn-sm btn-light" ><i class="{{redsocial.icono_class}}"></i></button>
         </td>
-        <td scope="col" class="text-center"><borrar-red-social-component (borrarRedSocial)="borrar(i,$event)" ></borrar-red-social-component></td>
+        <td *ngIf="mostrarBoton" scope="col" class="text-center"><borrar-red-social-component (borrarRedSocial)="borrar(i,$event)" ></borrar-red-social-component></td>
       </tr>
     </tbody>
   </table>
