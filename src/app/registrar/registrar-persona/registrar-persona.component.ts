@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute} from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PersonaService } from 'src/app/core/services';
@@ -16,6 +16,7 @@ export class RegistrarPersonaComponent implements OnInit {
     public listaRedSocial = [];
     public listaLocalidad = [];
     public personaModel = new PersonaModel();
+    public parametros: any;
 
     constructor(
       private _router: Router,
@@ -67,6 +68,8 @@ export class RegistrarPersonaComponent implements OnInit {
           delete vDatos['lista_red_social'];
 
           this.beneficiarioForm.patchValue(vDatos);
+          this.beneficiarioForm.get("lugar").patchValue(vDatos["lugar"]);
+          this.beneficiarioForm.get("contacto").patchValue(vDatos["contacto"]);
         }else{
           vDatos['nro_documento'] = dni;
           this.beneficiarioForm.patchValue(vDatos);
@@ -89,11 +92,11 @@ export class RegistrarPersonaComponent implements OnInit {
       if(this.beneficiarioForm.invalid){
         return;
       } else {
-        let persona = this.personaModel.deserealize(this.beneficiarioForm.value);
-        Object.assign(persona, {'lista_red_social': this.listaRedSocial});
-        console.log(persona);
+        let parametros = this.personaModel.deserealize(this.beneficiarioForm.value);
+        Object.assign(parametros, {'lista_red_social': this.listaRedSocial});
 
-        console.log("guardado con exito!!");
+        localStorage.setItem("datosPersona", JSON.stringify(parametros));
+        this._router.navigate(['buscar-persona','confirmar-datos']);
       }
     }
 }

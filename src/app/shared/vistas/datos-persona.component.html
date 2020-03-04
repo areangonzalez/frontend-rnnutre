@@ -1,0 +1,50 @@
+<div class="row ">
+  <div class="col-md-12 ">
+    <div class="card">
+      <div class="card-body">
+        <div class="d-flex justify-content-between">
+          <h5 class="d-flex align-items-center">Datos personales</h5>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <dl class="row">
+              <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Nro. Documento:</dt>
+              <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{datosPersona.nro_documento}}</dd>
+            </dl>
+            <dl class="row">
+                <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Apellido y nombre:</dt>
+                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{datosPersona.apellido}}, {{datosPersona.nombre}}</dd>
+            </dl>
+          </div>
+          <div class="col-md-12">
+            <div class="d-flex justify-content-center">
+              <div class="btn-group">
+                <ng-template #direccionContent>
+                  {{datosPersona.lugar.localidad}} <br>
+                  <span *ngIf="(datosPersona.lugar.barrio != '')" >{{datosPersona.lugar.barrio}} <br></span>
+                  {{datosPersona.lugar.calle}} {{datosPersona.lugar.altura}}
+                  <span *ngIf="(datosPersona.lugar.escalera != '')">
+                    <br> Esc/Mod:&nbsp;{{(datosPersona.lugar.escalera != "")?datosPersona.lugar.escalera:""}}
+                  </span>
+                  <span *ngIf="(datosPersona.lugar.piso != '')">
+                    <br> Piso:&nbsp;{{(datosPersona.lugar.piso != "")?datosPersona.lugar.piso:""}}
+                  </span>
+                  <span *ngIf="(datosPersona.lugar.depto != '')">
+                    <br>Dpto:&nbsp;{{(datosPersona.lugar.depto != "")?datosPersona.lugar.depto:""}}
+                  </span>
+                </ng-template>
+                <button type="button" class="btn btn-sm btn-light" container="body" triggers="click" [autoClose]="'outside'" [ngbTooltip]="direccionContent" container="body"><i class="fas fa-home"></i></button>
+                <button *ngIf="(mostrarBoton && datosPersona.telefono != '')" triggers="click" [autoClose]="'outside'" type="button" ngbTooltip="{{datosPersona.telefono}}" class="btn btn-sm btn-light"><i class="fas fa-phone"></i></button>
+                <button *ngIf="(mostrarBoton && datosPersona.celular != '')" triggers="click" [autoClose]="'outside'" type="button" ngbTooltip="{{datosPersona.celular}}" class="btn btn-sm btn-light"><i class="fas fa-mobile-alt"></i></button>
+                <button *ngIf="(mostrarBoton && datosPersona.email != '')" triggers="click" [autoClose]="'outside'" type="button" ngbTooltip="{{datosPersona.email}}" class="btn btn-sm btn-light"><i class="fas fa-envelope"></i></button>
+                <div *ngIf="(mostrarBoton && datosPersona.lista_red_social.length > 0 )">
+                  <a *ngFor="let redSocial of datosPersona.lista_red_social" href="{{redSocial.perfil}}" target="_blank" ngbTooltip="{{redSocial.tipo_red_social}}" class="btn btn-sm btn-light"><i class="{{redSocial.icono_class}}"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { BuscarPersonaComponent } from './buscar-persona';
 import { RegistrarPersonaComponent } from './registrar-persona';
 import { PersonaService, LocalidadService } from '../core/services';
+import { ConfirmarDatosComponent } from './confirmar';
 
 const routes: Routes = [
   {
@@ -11,6 +12,9 @@ const routes: Routes = [
   {
     path: 'registrar-persona/:documento', component: RegistrarPersonaComponent, data: { title: 'Registrar Persona' },
     resolve: { persona: PersonaService, localidad: LocalidadService }
+  },
+  {
+    path: 'confirmar-datos', component: ConfirmarDatosComponent, data: { title: 'Confirmar Datos' }
   }
 ]
 

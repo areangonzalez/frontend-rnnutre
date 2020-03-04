@@ -12,7 +12,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         // array in local storage for registered users
         let users: any[] = JSON.parse(localStorage.getItem('users')) || [];
         let personas = [
-          {id: 1, nro_documento: '29857364', nombre: 'Marcos', apellido: 'Gonzalez'},
+          { id: 1, nro_documento: '29857364', nombre: 'Marcos', apellido: 'Gonzalez', cant_hijo: 3, edad_por_hijo: '12, 13, 15', lugar: { localidadid: 2, calle: 'cipolletti', altura: '232', barrio: 'san martin' }, lista_red_social: [], telefono: '2920634455', celular: '', email: '' },
           {id: 2, nro_documento: '29232132', nombre: 'Pedro', apellido: 'Avila'}
         ];
         let beneficiario = [

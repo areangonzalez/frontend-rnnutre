@@ -4,6 +4,8 @@ export class PersonaModel {
   nombre: string;
   apellido: string;
   nro_documento: string;
+  cantidad_hijo: string;
+  edad_por_hijo: string;
   telefono: string;
   celular: string;
   email: string;
@@ -19,6 +21,8 @@ export class PersonaModel {
     this.nombre = '';
     this.apellido = '';
     this.nro_documento = '';
+    this.cantidad_hijo = '';
+    this.edad_por_hijo = '';
     this.telefono = '';
     this.celular = '';
     this.email = '';

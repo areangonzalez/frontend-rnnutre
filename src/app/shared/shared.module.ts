@@ -8,7 +8,11 @@ import { RouterModule } from "@angular/router";
 import { CabeceraComponent } from './layout'
 import { PersonaComponent, ContactoComponent, RedSocailFormComponent, LugarComponent } from "./formularios";
 import { RedSocialComponent } from './listas';
-import { ModalRedSocialComponent, ModalRedSocialContent, ModalBorrarRedSocialComponent, ModalBorrarRedSocialContent } from "./modal";
+import {
+  ModalRedSocialComponent, ModalRedSocialContent,
+  ModalBorrarRedSocialComponent, ModalBorrarRedSocialContent,
+ } from "./modal";
+import { DatosPersonaComponent } from "./vistas";
 
 
 @NgModule({
@@ -24,10 +28,12 @@ import { ModalRedSocialComponent, ModalRedSocialContent, ModalBorrarRedSocialCom
     CabeceraComponent,
     PersonaComponent, ContactoComponent, RedSocailFormComponent, LugarComponent,
     RedSocialComponent,
-    ModalRedSocialComponent, ModalRedSocialContent, ModalBorrarRedSocialComponent, ModalBorrarRedSocialContent
+    ModalRedSocialComponent, ModalRedSocialContent, ModalBorrarRedSocialComponent, ModalBorrarRedSocialContent,
+    DatosPersonaComponent
   ],
   exports: [
-    CommonModule, FormsModule, ReactiveFormsModule, HttpClientModule, RouterModule, CabeceraComponent, PersonaComponent, ContactoComponent, RedSocailFormComponent, RedSocialComponent, LugarComponent, ModalRedSocialComponent, ModalRedSocialContent, ModalBorrarRedSocialComponent, ModalBorrarRedSocialContent
+    CommonModule, FormsModule, ReactiveFormsModule, HttpClientModule, RouterModule, CabeceraComponent, PersonaComponent, ContactoComponent, RedSocailFormComponent, RedSocialComponent, LugarComponent, ModalRedSocialComponent, ModalRedSocialContent, ModalBorrarRedSocialComponent, ModalBorrarRedSocialContent,
+    DatosPersonaComponent
   ],
   entryComponents:[
     ModalRedSocialComponent, ModalRedSocialContent, ModalBorrarRedSocialComponent, ModalBorrarRedSocialContent
