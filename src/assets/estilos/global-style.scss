@@ -16,3 +16,6 @@ body {
 .texto-responsive {
   overflow-wrap: break-word;
 }
+td {
+  word-break: break-all;
+}

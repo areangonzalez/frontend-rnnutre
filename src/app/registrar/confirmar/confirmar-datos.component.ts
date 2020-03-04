@@ -22,4 +22,11 @@ export class ConfirmarDatosComponent implements OnInit {
       this._router.navigate(['buscar-persona', 'registrar-persona', this.datosPersona.nro_documento]);
     }
 
+    cancelar(confirmar: boolean) {
+      if (confirmar) {
+        localStorage.removeItem("datosPersona");
+        this._router.navigate(['buscar-persona']);
+      }
+    }
+
 }

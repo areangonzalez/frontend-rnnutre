@@ -2,30 +2,30 @@ import { Component, Output, EventEmitter } from '@angular/core';
 import { NgbActiveModal, NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'modal-borrar-red-social-content',
-  templateUrl: './modal-borrar-red-social.content.html'
+  selector: 'modal-confirmar-cancelacion-content',
+  templateUrl: './modal-confirmar-cancelacion.content.html'
 })
-export class ModalBorrarRedSocialContent {
+export class ModalConfirmarCancelacionContent {
   constructor(public activeModal: NgbActiveModal) {}
 
-  public confirmacion(confirma: boolean) {
-    this.activeModal.close(confirma);
+  public confirmacion(confirmar: boolean) {
+    this.activeModal.close(confirmar);
   }
 }
 
 @Component({
-  selector: 'borrar-red-social-component',
+  selector: 'confirmar-cancelacion-modal',
   template: `
-    <button type="button" class="btn btn-outline-danger btn-sm" (click)="open()" ngbTooltip="Borrar Red Social" placement="left" container="body" ><i class="far fa-trash-alt"></i></button>
+    <button type="button" class="btn btn-danger" (click)="open()"><i class="far fa-times-circle"></i> Cancelar</button>
   `,
   providers: [NgbModalConfig, NgbModal]
 })
-export class ModalBorrarRedSocialComponent {
+export class ModalConfirmarCancelacionComponent {
   /**
    * @var recursoid {number} identificador de una persona
    * @function {Object} devuelve los datos de la persona
    */
-  @Output("borrarRedSocial") public borrarRedSocial = new EventEmitter();
+  @Output("obtenerConfirmacion") public obtenerConfirmacion = new EventEmitter();
 
   constructor(
     private modalService: NgbModal,
@@ -36,13 +36,13 @@ export class ModalBorrarRedSocialComponent {
   }
 
   open() {
-    const modalRef = this.modalService.open(ModalBorrarRedSocialContent, {  size: 'sm', centered: true });
+    const modalRef = this.modalService.open(ModalConfirmarCancelacionContent, {  size: 'sm', centered: true });
     modalRef.result.then(
       (result) => {
         if (result == 'closed'){
         }else{
           // obtengo el resultado de la operacion.
-          return this.borrarRedSocial.emit(result);
+          return this.obtenerConfirmacion.emit(result);
         }
       }
     )

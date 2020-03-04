@@ -56,7 +56,7 @@ export class RegistrarPersonaComponent implements OnInit {
         this._router.navigate(['/']);
       }else{
         if (datosPersona["id"] !== undefined) {
-          datosPersona = (localStorage.getItem("datosPersona") !== undefined) ? JSON.parse(localStorage.getItem("datosPersona")) : datosPersona
+          datosPersona = (localStorage.getItem("datosPersona") !== null) ? JSON.parse(localStorage.getItem("datosPersona")) : datosPersona
           vDatos = datosPersona;
           vDatos['contacto'] = {};
           vDatos['contacto']['telefono'] = datosPersona['telefono'];
@@ -95,9 +95,19 @@ export class RegistrarPersonaComponent implements OnInit {
       } else {
         let parametros = this.personaModel.deserealize(this.beneficiarioForm.value);
         Object.assign(parametros, {'lista_red_social': this.listaRedSocial});
+        parametros.lugar.localidad = this.conseguirLocalidadPorId(parametros.lugar.localidadid);
 
         localStorage.setItem("datosPersona", JSON.stringify(parametros));
         this._router.navigate(['buscar-persona','confirmar-datos']);
+      }
+    }
+
+    conseguirLocalidadPorId(idLocalidad) {
+      for (let i = 0; i < this.listaLocalidad.length; i++) {
+        if (parseInt(this.listaLocalidad[i]["id"]) == parseInt(idLocalidad) ) {
+          return this.listaLocalidad[i]["nombre"];
+        }
+
       }
     }
 }

@@ -11,6 +11,7 @@ import { RedSocialComponent } from './listas';
 import {
   ModalRedSocialComponent, ModalRedSocialContent,
   ModalBorrarRedSocialComponent, ModalBorrarRedSocialContent,
+  ModalConfirmarCancelacionComponent, ModalConfirmarCancelacionContent
  } from "./modal";
 import { DatosPersonaComponent } from "./vistas";
 
@@ -29,14 +30,17 @@ import { DatosPersonaComponent } from "./vistas";
     PersonaComponent, ContactoComponent, RedSocailFormComponent, LugarComponent,
     RedSocialComponent,
     ModalRedSocialComponent, ModalRedSocialContent, ModalBorrarRedSocialComponent, ModalBorrarRedSocialContent,
-    DatosPersonaComponent
+    DatosPersonaComponent,
+    ModalConfirmarCancelacionComponent, ModalConfirmarCancelacionContent
   ],
   exports: [
     CommonModule, FormsModule, ReactiveFormsModule, HttpClientModule, RouterModule, CabeceraComponent, PersonaComponent, ContactoComponent, RedSocailFormComponent, RedSocialComponent, LugarComponent, ModalRedSocialComponent, ModalRedSocialContent, ModalBorrarRedSocialComponent, ModalBorrarRedSocialContent,
-    DatosPersonaComponent
+    DatosPersonaComponent,
+    ModalConfirmarCancelacionComponent, ModalConfirmarCancelacionContent
   ],
   entryComponents:[
-    ModalRedSocialComponent, ModalRedSocialContent, ModalBorrarRedSocialComponent, ModalBorrarRedSocialContent
+    ModalRedSocialComponent, ModalRedSocialContent, ModalBorrarRedSocialComponent, ModalBorrarRedSocialContent,
+    ModalConfirmarCancelacionComponent, ModalConfirmarCancelacionContent
   ]
 })
 export class SharedModule {}

@@ -7,7 +7,7 @@
   </div>
   <hr class="pt1">
   <div class="d-flex justify-content-between p-2">
-    <button type="button" class="btn btn-danger" (click)="cancelar()"><i class="fa fa-ban"></i> Cancelar</button>
+    <confirmar-cancelacion-modal (obtenerConfirmacion)="cancelar($event)"></confirmar-cancelacion-modal>
     <button type="button" class="btn btn-light" (click)="editar()"><i class="fa fa-pencil-alt"></i> Editar</button>
     <button type="button" class="btn btn-success" (click)="confirmar()"><i class="fa fa-check-circle"></i> Confirmar</button>
   </div>

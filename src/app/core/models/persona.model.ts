@@ -13,7 +13,8 @@ export class PersonaModel {
       barrio: string,
       calle: string,
       altura: string,
-      localidadid: number
+      localidadid: number,
+      localidad: string
   };
 
   constructor() {
@@ -30,7 +31,8 @@ export class PersonaModel {
         barrio:'',
         calle:'',
         altura:'',
-        localidadid:0
+        localidadid:0,
+        localidad:''
     }
   }
 
