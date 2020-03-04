@@ -56,6 +56,7 @@ export class RegistrarPersonaComponent implements OnInit {
         this._router.navigate(['/']);
       }else{
         if (datosPersona["id"] !== undefined) {
+          datosPersona = (localStorage.getItem("datosPersona") !== undefined) ? JSON.parse(localStorage.getItem("datosPersona")) : datosPersona
           vDatos = datosPersona;
           vDatos['contacto'] = {};
           vDatos['contacto']['telefono'] = datosPersona['telefono'];
