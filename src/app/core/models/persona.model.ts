@@ -1,5 +1,5 @@
 
-export class PersonaModel {
+export class PersonaModel implements IPersona {
   id: number;
   nombre: string;
   apellido: string;
@@ -16,6 +16,7 @@ export class PersonaModel {
       localidadid: number,
       localidad: string
   };
+  lista_red_social: any[]
 
   constructor() {
     this.id = 0;

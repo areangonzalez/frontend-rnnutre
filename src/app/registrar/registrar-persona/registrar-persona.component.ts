@@ -1,13 +1,15 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { Router, ActivatedRoute} from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { PersonaService } from 'src/app/core/services';
+import { PersonaService, DatosPersonaService } from 'src/app/core/services';
 import { PersonaModel } from 'src/app/core/models';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'registrar-persona',
     templateUrl: './registrar-persona.component.html',
-    styleUrls: ['./registrar-persona.scss']
+    styleUrls: ['./registrar-persona.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RegistrarPersonaComponent implements OnInit {
     public isCollapsed = true;
@@ -17,12 +19,14 @@ export class RegistrarPersonaComponent implements OnInit {
     public listaLocalidad = [];
     public personaModel = new PersonaModel();
     public parametros: any;
+    private persona$: Observable<any>;
 
     constructor(
       private _router: Router,
       private _route: ActivatedRoute,
       private _fb: FormBuilder,
-      private _personaService: PersonaService
+      private _personaService: PersonaService,
+      private _datosPersonaService: DatosPersonaService
     ){
       this.beneficiarioForm = _fb.group({
         id:'',
@@ -46,17 +50,27 @@ export class RegistrarPersonaComponent implements OnInit {
     }
 
     ngOnInit(){
+      this.persona$ = this._datosPersonaService.getPersona();
       this.listaLocalidad = this._route.snapshot.data['localidad'];
       this.configPersona(this._route.snapshot.data['persona'], this._route.snapshot.paramMap.get('documento'));
     }
 
     configPersona(datosPersona:any, dni: string) {
       let vDatos = {};
-      if (datosPersona['beneficiario']) {
+      let esBeneficiario = datosPersona['beneficiario'];
+      let persona: any;
+      // obtengo la supcription del observable
+      this.persona$.subscribe(datos => {
+        persona = datos;
+      });
+      console.log("Observable: ", persona);
+      // verifico si existe la subscription o utiizo a variable de datospersona
+      datosPersona = (persona.id !== undefined) ? persona : datosPersona;
+      if (esBeneficiario) {
         this._router.navigate(['/']);
       }else{
         if (datosPersona["id"] !== undefined) {
-          datosPersona = (localStorage.getItem("datosPersona") !== null) ? JSON.parse(localStorage.getItem("datosPersona")) : datosPersona
+          // armo el array para el formulario
           vDatos = datosPersona;
           vDatos['contacto'] = {};
           vDatos['contacto']['telefono'] = datosPersona['telefono'];
@@ -72,6 +86,7 @@ export class RegistrarPersonaComponent implements OnInit {
           this.beneficiarioForm.get("lugar").patchValue(vDatos["lugar"]);
           this.beneficiarioForm.get("contacto").patchValue(vDatos["contacto"]);
         }else{
+          // si no tengo los datos de una persona dejo el formulario vacio con solo el documento
           vDatos['nro_documento'] = dni;
           this.beneficiarioForm.patchValue(vDatos);
         }
@@ -93,11 +108,23 @@ export class RegistrarPersonaComponent implements OnInit {
       if(this.beneficiarioForm.invalid){
         return;
       } else {
-        let parametros = this.personaModel.deserealize(this.beneficiarioForm.value);
+        /* let parametros = this.personaModel.deserealize(this.beneficiarioForm.value);
         Object.assign(parametros, {'lista_red_social': this.listaRedSocial});
-        parametros.lugar.localidad = this.conseguirLocalidadPorId(parametros.lugar.localidadid);
+        parametros.lugar.localidad = this.conseguirLocalidadPorId(parametros.lugar.localidadid); */
+        let persona: IPersona = this.personaModel.deserealize(this.beneficiarioForm.value);
+        Object.assign(persona, {'lista_red_social': this.listaRedSocial});
+        persona.lugar.localidad = this.conseguirLocalidadPorId(persona.lugar.localidadid)
+        // datos para la interface de persona
+        /* let datosPersona: IPersona = this.beneficiarioForm.value;
+        Object.assign(datosPersona, {'lista_red_social': this.listaRedSocial});
+        datosPersona.lugar.localidad = this.conseguirLocalidadPorId(datosPersona.lugar.localidadid); */
 
-        localStorage.setItem("datosPersona", JSON.stringify(parametros));
+        console.log("actualizo datos persona", persona);
+
+
+        this._datosPersonaService.addPersona(persona);
+
+        /* localStorage.setItem("datosPersona", JSON.stringify(parametros)); */
         this._router.navigate(['buscar-persona','confirmar-datos']);
       }
     }

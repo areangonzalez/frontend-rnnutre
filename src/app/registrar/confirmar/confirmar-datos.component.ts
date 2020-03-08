@@ -1,17 +1,26 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
-import { BeneficiarioService } from 'src/app/core/services';
+import { BeneficiarioService, DatosPersonaService } from 'src/app/core/services';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'confirmar-datos',
-    templateUrl: './confirmar-datos.component.html'
+    templateUrl: './confirmar-datos.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ConfirmarDatosComponent implements OnInit {
-    public datosPersona = JSON.parse(localStorage.getItem('datosPersona'));
+    //public datosPersona = JSON.parse(localStorage.getItem('datosPersona'));
+    public datosPersona: IPersona;
+    private persona$: Observable<any>;
 
-    constructor( private _router: Router, private _beneficiarioService: BeneficiarioService ){}
+    constructor( private _router: Router, private _beneficiarioService: BeneficiarioService, private _datosPersonaService: DatosPersonaService ){}
 
-    ngOnInit(){}
+    ngOnInit(){
+      this.persona$ = this._datosPersonaService.getPersona();
+      this.persona$.subscribe( datos => {
+        this.datosPersona = datos;
+      });
+    }
 
     confirmar() {
       this._beneficiarioService.guardar(this.datosPersona, 0).subscribe(
