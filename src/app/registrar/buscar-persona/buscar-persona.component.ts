@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { UtilService, PersonaService } from '../../core/services';
+import { UtilService, PersonaService, MensajeService } from '../../core/services';
 
 @Component({
     selector: 'registrar-buscar-persona',
@@ -19,7 +19,8 @@ export class BuscarPersonaComponent implements OnInit {
        private _router: Router,
        private _fb: FormBuilder,
        private _utilService: UtilService,
-       private _personaService: PersonaService
+       private _personaService: PersonaService,
+       private _mensajeService: MensajeService
     ){
       // armo el formulario con sus validaciones
       this.buscarForm = _fb.group({
@@ -27,8 +28,7 @@ export class BuscarPersonaComponent implements OnInit {
       });
     }
 
-    ngOnInit(){
-    }
+    ngOnInit(){}
     /**
      * busco la persona por numero de documento;
      */
@@ -45,7 +45,7 @@ export class BuscarPersonaComponent implements OnInit {
             this.nroDocumentoBuscado = nroDocumento;
             this.esBeneficiario = respuesta['beneficiario'];
           }, error  => {
-            console.log(error);
+            this._mensajeService.cancelado(error, [{name:''}]);
           });
         }
     }

@@ -14,14 +14,8 @@ export class DatosPersonaService {
   }
 
  addPersona(persona: IPersona) {
-   console.log(this.persona);
-    if (!this.persona){
       this.persona = persona;
       this.update();
-    }else{
-      this.persona = persona;
-      this.update();
-    }
   }
 
   private update() {

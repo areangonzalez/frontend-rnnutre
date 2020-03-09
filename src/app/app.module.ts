@@ -14,13 +14,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { CoreModule } from "./core/core.module";
-import { AppLayoutComponent, SharedModule } from "./shared";
+import { AppLayoutComponent, MensajeComponent, SharedModule } from "./shared";
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    AppLayoutComponent
+    AppLayoutComponent,
+    MensajeComponent
   ],
   imports: [
     BrowserModule,

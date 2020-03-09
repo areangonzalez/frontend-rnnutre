@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
-import { BeneficiarioService, DatosPersonaService } from 'src/app/core/services';
-import { Observable } from 'rxjs';
+import { BeneficiarioService, MensajeService } from 'src/app/core/services';
 
 @Component({
     selector: 'confirmar-datos',
@@ -9,27 +8,30 @@ import { Observable } from 'rxjs';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ConfirmarDatosComponent implements OnInit {
-    //public datosPersona = JSON.parse(localStorage.getItem('datosPersona'));
-    public datosPersona: IPersona;
-    private persona$: Observable<any>;
+    public datosPersona: IPersona = (localStorage.getItem("persona") != null) ? JSON.parse(localStorage.getItem("persona")) : null;
 
-    constructor( private _router: Router, private _beneficiarioService: BeneficiarioService, private _datosPersonaService: DatosPersonaService ){}
+    constructor(
+      private _router: Router, private _beneficiarioService: BeneficiarioService,
+      private _mensajeService: MensajeService
+    ){}
 
     ngOnInit(){
-      this.persona$ = this._datosPersonaService.getPersona();
-      this.persona$.subscribe( datos => {
-        this.datosPersona = datos;
-      });
+      if (this.datosPersona == null){
+        this._router.navigate(["/"]);
+      }
     }
-
+    /**
+     * Confirmo el guardado de los datos de una persona
+     */
     confirmar() {
       this._beneficiarioService.guardar(this.datosPersona, 0).subscribe(
         respuesta =>{
           if (respuesta["success"]){
-            // colocar mensaje exitoso
+            this._mensajeService.exitoso("Se han guardado los datos de la persona.", [{name:'buscar-persona'}]);
+            localStorage.removeItem("persona");
             this._router.navigate(["buscar-persona"]);
           }
-      }, error => { console.log(error); })
+      }, error => { this._mensajeService.cancelado(error, [{name:''}]); })
     }
     /**
      * Vuelvo al formulario para editar los datos
@@ -40,7 +42,7 @@ export class ConfirmarDatosComponent implements OnInit {
 
     cancelar(confirmar: boolean) {
       if (confirmar) {
-        localStorage.removeItem("datosPersona");
+        localStorage.removeItem("persona");
         this._router.navigate(['buscar-persona']);
       }
     }

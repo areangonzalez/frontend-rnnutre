@@ -1,9 +1,8 @@
 import { Component, OnInit, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { Router, ActivatedRoute} from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { PersonaService, DatosPersonaService } from 'src/app/core/services';
 import { PersonaModel } from 'src/app/core/models';
-import { Observable } from 'rxjs';
+import { MensajeService } from 'src/app/core/services';
 
 @Component({
     selector: 'registrar-persona',
@@ -18,15 +17,12 @@ export class RegistrarPersonaComponent implements OnInit {
     public listaRedSocial = [];
     public listaLocalidad = [];
     public personaModel = new PersonaModel();
-    public parametros: any;
-    private persona$: Observable<any>;
 
     constructor(
       private _router: Router,
       private _route: ActivatedRoute,
       private _fb: FormBuilder,
-      private _personaService: PersonaService,
-      private _datosPersonaService: DatosPersonaService
+      private _mensajeService: MensajeService
     ){
       this.beneficiarioForm = _fb.group({
         id:'',
@@ -50,7 +46,6 @@ export class RegistrarPersonaComponent implements OnInit {
     }
 
     ngOnInit(){
-      this.persona$ = this._datosPersonaService.getPersona();
       this.listaLocalidad = this._route.snapshot.data['localidad'];
       this.configPersona(this._route.snapshot.data['persona'], this._route.snapshot.paramMap.get('documento'));
     }
@@ -58,14 +53,10 @@ export class RegistrarPersonaComponent implements OnInit {
     configPersona(datosPersona:any, dni: string) {
       let vDatos = {};
       let esBeneficiario = datosPersona['beneficiario'];
-      let persona: any;
-      // obtengo la supcription del observable
-      this.persona$.subscribe(datos => {
-        persona = datos;
-      });
-      console.log("Observable: ", persona);
-      // verifico si existe la subscription o utiizo a variable de datospersona
-      datosPersona = (persona.id !== undefined) ? persona : datosPersona;
+      // obtengo los datos de local storage
+      let persona: any = (localStorage.getItem("persona")) ? JSON.parse(localStorage.getItem("persona")) : null;
+      // verifico si existe el localStorage de persona o utiizo la variable de datospersona
+      datosPersona = (persona !== null) ? persona : datosPersona;
       if (esBeneficiario) {
         this._router.navigate(['/']);
       }else{
@@ -91,8 +82,6 @@ export class RegistrarPersonaComponent implements OnInit {
           this.beneficiarioForm.patchValue(vDatos);
         }
       }
-
-
     }
     /**
      * Cancelo la creacion de un beneficiario
@@ -106,25 +95,16 @@ export class RegistrarPersonaComponent implements OnInit {
     validar() {
       this.submited = true;
       if(this.beneficiarioForm.invalid){
+        this._mensajeService.cancelado("Por favor complete los campos!!", [{name:''}]);
         return;
       } else {
-        /* let parametros = this.personaModel.deserealize(this.beneficiarioForm.value);
-        Object.assign(parametros, {'lista_red_social': this.listaRedSocial});
-        parametros.lugar.localidad = this.conseguirLocalidadPorId(parametros.lugar.localidadid); */
+
         let persona: IPersona = this.personaModel.deserealize(this.beneficiarioForm.value);
         Object.assign(persona, {'lista_red_social': this.listaRedSocial});
         persona.lugar.localidad = this.conseguirLocalidadPorId(persona.lugar.localidadid)
-        // datos para la interface de persona
-        /* let datosPersona: IPersona = this.beneficiarioForm.value;
-        Object.assign(datosPersona, {'lista_red_social': this.listaRedSocial});
-        datosPersona.lugar.localidad = this.conseguirLocalidadPorId(datosPersona.lugar.localidadid); */
 
-        console.log("actualizo datos persona", persona);
+        localStorage.setItem("persona", JSON.stringify(persona));
 
-
-        this._datosPersonaService.addPersona(persona);
-
-        /* localStorage.setItem("datosPersona", JSON.stringify(parametros)); */
         this._router.navigate(['buscar-persona','confirmar-datos']);
       }
     }

@@ -14,8 +14,6 @@ import {
   ModalConfirmarCancelacionComponent, ModalConfirmarCancelacionContent
  } from "./modal";
 import { DatosPersonaComponent } from "./vistas";
-import { MensajeComponent } from './mensajes';
-
 
 @NgModule({
   imports: [
@@ -33,13 +31,11 @@ import { MensajeComponent } from './mensajes';
     ModalRedSocialComponent, ModalRedSocialContent, ModalBorrarRedSocialComponent, ModalBorrarRedSocialContent,
     DatosPersonaComponent,
     ModalConfirmarCancelacionComponent, ModalConfirmarCancelacionContent,
-    MensajeComponent
   ],
   exports: [
     CommonModule, FormsModule, ReactiveFormsModule, HttpClientModule, RouterModule, CabeceraComponent, PersonaComponent, ContactoComponent, RedSocailFormComponent, RedSocialComponent, LugarComponent, ModalRedSocialComponent, ModalRedSocialContent, ModalBorrarRedSocialComponent, ModalBorrarRedSocialContent,
     DatosPersonaComponent,
     ModalConfirmarCancelacionComponent, ModalConfirmarCancelacionContent,
-    MensajeComponent
   ],
   entryComponents:[
     ModalRedSocialComponent, ModalRedSocialContent, ModalBorrarRedSocialComponent, ModalBorrarRedSocialContent,

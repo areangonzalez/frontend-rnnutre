@@ -7,7 +7,7 @@ import { MensajeService } from "../../core/services";
 @Component({
     selector: 'mensajes-alert',
     templateUrl: './mensaje.component.html',
-    //styleUrls: ['./mensaje.component.sass']
+    styleUrls: ['./mensaje.scss']
 })
 @Injectable()
 export class MensajeComponent implements OnInit {
