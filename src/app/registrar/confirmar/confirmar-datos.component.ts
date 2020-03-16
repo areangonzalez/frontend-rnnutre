@@ -26,11 +26,8 @@ export class ConfirmarDatosComponent implements OnInit {
     confirmar() {
       this._beneficiarioService.guardar(this.datosPersona, 0).subscribe(
         respuesta =>{
-          if (respuesta["success"]){
-            this._mensajeService.exitoso("Se han guardado los datos de la persona.", [{name:'buscar-persona'}]);
             localStorage.removeItem("persona");
-            this._router.navigate(["buscar-persona"]);
-          }
+            this._mensajeService.exitoso("Se han guardado los datos de la persona.", [{name:'buscar-persona'}]);
       }, error => { this._mensajeService.cancelado(error, [{name:''}]); })
     }
     /**

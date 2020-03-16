@@ -96,24 +96,26 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 } */
             }
 
-            // register user
-            if (request.url.endsWith('/users/register') && request.method === 'POST') {
+            // GUARDAR BENEFICIARIO
+            if (request.url.endsWith('/apimock/beneficiarios') && request.method === 'POST') {
                 // get new user object from post body
-                let newUser = request.body;
+                let nuevoBeneficiario = request.body;
 
                 // validation
-                let duplicateUser = users.filter(user => { return user.username === newUser.username; }).length;
-                if (duplicateUser) {
-                    return throwError({ error: { message: 'Username "' + newUser.username + '" is already taken' } });
+                let duplicateBeneficiario = beneficiario.filter(beneficiario => { return beneficiario.personaid === nuevoBeneficiario.id; }).length;
+                if (duplicateBeneficiario) {
+                    return throwError({ error: { message: 'El beneficiario ya esta registrado'} });
                 }
-
-                // save new user
-                newUser.id = users.length + 1;
-                users.push(newUser);
-                localStorage.setItem('users', JSON.stringify(users));
+                let idBeneficiario = beneficiario.length + 1;
+                // save new beneficiario
+                beneficiario.push({
+                  "id": idBeneficiario,
+                  "personaid": nuevoBeneficiario.id
+                });
+                localStorage.setItem('beneficiario', JSON.stringify(beneficiario));
 
                 // respond 200 OK
-                return of(new HttpResponse({ status: 200 }));
+                return of(new HttpResponse({ status: 200, body: { id: idBeneficiario } }));
             }
 
             // delete user

@@ -19,15 +19,15 @@ const routes: Routes = [
       }*/
     ]
   },
-  // {
-  //   path: 'admin', data: { title: "admin" },
-  //   component: AdminLayoutComponent,
-  //   children: [{
-  //     path: '',
-  //     canActivate: [AuthGuard],
-  //     loadChildren: './admin/admin.module#AdminModule'
-  //   }]
-  // },
+  {
+    path: 'beneficiario',
+    component: AppLayoutComponent,
+    children: [{
+      path: '',
+      //canActivate: [AuthGuard],
+      loadChildren: './beneficiario/beneficiario.module#BeneficiarioModule'
+    }]
+  },
   //{ path: 'login', data: { title: "Iniciar sesión" }, loadChildren: './login/login.module#LoginModule' },
   { path: '**', redirectTo: 'buscar-persona', pathMatch: 'full' },
 ]
