@@ -9,10 +9,15 @@
       <th scope="col">Cantidad de hijo/s (edad/es)</th>
       <th scope="col" class="text-center"></th>
     </thead>
-    <tbody>
+    <tbody *ngIf="(listadoBeneficiario.length == 0)">
       <tr>
-        <td scope="col">12345678</td>
-        <td scope="col" colspan="2">Perez, Carlos</td>
+        <td rowspan="1" colspan="7" class="text-center"><h5>No se han encontrado beneficiarios</h5></td>
+      </tr>
+    </tbody>
+    <tbody *ngIf="(listadoBeneficiario.length > 0)">
+      <tr *ngFor="let beneficiario of listadoBeneficiario">
+        <td scope="col">{{beneficiario.persona.nro_documento}}</td>
+        <td scope="col" colspan="2">{{beneficiario.persona.apellido}}, {{beneficiario.persona.nombre}}</td>
         <td scope="col">
           <div class="btn-group">
             <button type="button" class="btn btn-outline-secondary btn-sm"><i class="fa fa-home"></i></button>
@@ -20,9 +25,9 @@
             <button type="button" class="btn btn-outline-secondary btn-sm"><i class="fab fa-facebook-square"></i></button>
           </div>
         </td>
-        <td scope="col">Viedma</td>
-        <td scope="col">Inalauquen</td>
-        <td scope="col">1 hijo/s (22 año/s)</td>
+        <td scope="col">{{beneficiario.persona.lugar.localidad}}</td>
+        <td scope="col">{{beneficiario.persona.lugar.barrio}}</td>
+        <td scope="col">{{beneficiario.cantidad_hijo}} hijo/s (Edad/es: {{beneficiario.edad_por_hijo}})</td>
         <td scope="col">
           <div class="btn-group">
             <button type="button" class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-alt"></i></button>
@@ -32,13 +37,9 @@
         </td>
       </tr>
     </tbody>
-    <!-- <tbody *ngIf="(listadoRedSocial.length == 0)">
-      <tr>
-        <td rowspan="1" colspan="4" class="text-center"><h5>No tiene redes sociales</h5></td>
-      </tr>
-    </tbody>
-    <tbody *ngIf="(listadoRedSocial.length > 0)">
-      <tr *ngFor="let redsocial of listadoRedSocial; let i = index">
+    <!--
+
+
         <td scope="col"><a href="{{redsocial.perfil}}" target="_blank">{{redsocial.perfil}}</a></td>
         <td scope="col">{{redsocial.tipo_red_social}}</td>
         <td scope="col">
