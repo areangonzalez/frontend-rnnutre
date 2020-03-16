@@ -1,0 +1,50 @@
+<div class="col-md-12">
+  <table class="table table-hover table-sm">
+    <thead>
+      <th scope="col">Nro. Documento</th>
+      <th scope="col" colspan="2">Apellido y Nombre</th>
+      <th scope="col"></th>
+      <th scope="col">Localidad</th>
+      <th scope="col">Barrio</th>
+      <th scope="col">Cantidad de hijo/s (edad/es)</th>
+      <th scope="col" class="text-center"></th>
+    </thead>
+    <tbody>
+      <tr>
+        <td scope="col">12345678</td>
+        <td scope="col" colspan="2">Perez, Carlos</td>
+        <td scope="col">
+          <div class="btn-group">
+            <button type="button" class="btn btn-outline-secondary btn-sm"><i class="fa fa-home"></i></button>
+            <button type="button" class="btn btn-outline-secondary btn-sm"><i class="fa fa-phone"></i></button>
+            <button type="button" class="btn btn-outline-secondary btn-sm"><i class="fab fa-facebook-square"></i></button>
+          </div>
+        </td>
+        <td scope="col">Viedma</td>
+        <td scope="col">Inalauquen</td>
+        <td scope="col">1 hijo/s (22 año/s)</td>
+        <td scope="col">
+          <div class="btn-group">
+            <button type="button" class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-alt"></i></button>
+            <button type="button" class="btn btn-outline-secondary btn-sm"><i class="fas fa-pencil-alt"></i></button>
+            <button type="button" class="btn btn-outline-success btn-sm"><i class="far fa-credit-card"></i></button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+    <!-- <tbody *ngIf="(listadoRedSocial.length == 0)">
+      <tr>
+        <td rowspan="1" colspan="4" class="text-center"><h5>No tiene redes sociales</h5></td>
+      </tr>
+    </tbody>
+    <tbody *ngIf="(listadoRedSocial.length > 0)">
+      <tr *ngFor="let redsocial of listadoRedSocial; let i = index">
+        <td scope="col"><a href="{{redsocial.perfil}}" target="_blank">{{redsocial.perfil}}</a></td>
+        <td scope="col">{{redsocial.tipo_red_social}}</td>
+        <td scope="col">
+            <button class="btn btn-sm btn-light" ><i class="{{redsocial.icono_class}}"></i></button>
+        </td>
+        <td *ngIf="mostrarBoton" scope="col" class="text-center"><borrar-red-social-component (borrarRedSocial)="borrar(i,$event)" ></borrar-red-social-component></td>
+      </tr>
+    </tbody> -->
+  </table>
