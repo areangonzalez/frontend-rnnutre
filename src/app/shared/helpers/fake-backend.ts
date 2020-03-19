@@ -137,9 +137,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             if (request.url.endsWith('/apimock/beneficiarios') && request.method === 'GET') {
               // paginacion
               // let pageSize: number = parseInt(request.params.get('pagesize'));
-              // let page: number = parseInt(request.params.get("page"));
+              let page: number = parseInt(request.params.get("page"));
               let pageSize: number = 2;
-              let page: number = 0;
               // parametros de busqueda
               let localidadid = request.params.get('localidadid');
               let global_search = request.params.get('global_param');

@@ -27,7 +27,9 @@ export class BeneficiarioService {
       route: ActivatedRouteSnapshot,
       state: RouterStateSnapshot,
       ): Observable<any>|Promise<any>|any {
-        return this._apiService.get('/beneficiarios');
+        let httpParams = new HttpParams();
+        httpParams = this._apiService.formatParams(httpParams, {page:0});
+        return this._apiService.get('/beneficiarios', httpParams);
       }
 
 }

@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { ConfigurarPagina } from '../../core/models';
 
 @Component({
     selector: 'lista-beneficiario',
@@ -6,7 +7,8 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ListaBeneficiarioComponent implements OnInit {
   @Input("ListadoBeneficiario") public listadoBeneficiario: any;
-  /* @Input("mostrarBotones") public mostrarBoton: boolean */;
+  @Input('configurarPaginacion') public configurarPaginacion: ConfigurarPagina;
+  @Output("cambioDePagina") public cambioDePagina = new EventEmitter();
   constructor(){}
 
   ngOnInit(){}
@@ -17,16 +19,14 @@ export class ListaBeneficiarioComponent implements OnInit {
 
     return direccion;
   }
-
-
-  /* public agregarBeneficiario(redSocial:any) {
-    this.listadoBeneficiario.push(redSocial);
+  /**
+   * Recibo el numero de pagina y lo envio al componente padre
+   * @param page numero de pagina
+   */
+  cambioPagina(page:number){
+    this.cambioDePagina.emit(page);
   }
 
-  borrar(id:number, confirmacion: boolean){
-    if (confirmacion){
-      this.listadoBeneficiario.splice(id, 1);
-    }
-  } */
+
 
 }

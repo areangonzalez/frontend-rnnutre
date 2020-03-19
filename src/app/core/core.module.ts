@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import {
   TitleService, ApiService, PersonaService, UtilService, TipoRedSocialService,
-  LocalidadService, BeneficiarioService, MensajeService, DatosPersonaService
+  LocalidadService, BeneficiarioService, MensajeService, DatosPersonaService, ConfiguracionParaPaginarService
 } from "./services";
 
 @NgModule({
@@ -12,7 +12,7 @@ import {
   ],
   providers: [
     TitleService, ApiService, PersonaService, UtilService, TipoRedSocialService,
-    LocalidadService, BeneficiarioService, MensajeService, DatosPersonaService
-  ]
+    LocalidadService, BeneficiarioService, MensajeService, DatosPersonaService, ConfiguracionParaPaginarService
+  ],
 })
 export class CoreModule {}
