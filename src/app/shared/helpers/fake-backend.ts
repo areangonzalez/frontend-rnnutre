@@ -22,7 +22,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
           },
           {
             id: 2, personaid: 3, estado: "admitido", cantidad_hijo: 1, edad_por_hijo: '12',
-            persona: { id: 3, nro_documento: '23654224', nombre: 'Sofia', apellido: 'Benitez', lugar: { localidadid: 2, calle: 'mata negra', altura: '232', barrio: 'Inalauquen', localidad: "Bariloche" }, lista_red_social: [], telefono: '2920657654', celular: '', email: '' }
+            persona: { id: 3, nro_documento: '23654224', nombre: 'Sofia', apellido: 'Benitez', lugar: { localidadid: 2, calle: 'mata negra', altura: '232', barrio: 'Inalauquen', localidad: "Bariloche" }, lista_red_social: [{tipo_red_socialid:1, tipo_red_social: "Facebook", perfil:"https://www.facebook.com/sofi.benitez", icono_class: "fab fa-facebook-square"}], telefono: '2920657654', celular: '', email: '' }
           },
           {
             id: 3, personaid: 4, estado: "admitido", cantidad_hijo: 2, edad_por_hijo: '12, 15',
@@ -30,7 +30,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
           },
           {
             id: 4, personaid: 5, estado: "admitido", cantidad_hijo: 5, edad_por_hijo: '12, 13, 15, 22, 6',
-            persona: { id: 5, nro_documento: '23345674', nombre: 'Jose', apellido: 'Ponce', lugar: { localidadid: 2, calle: 'San luis', altura: '1187', barrio: 'Fatima', localidad: "Bariloche" }, lista_red_social: [], telefono: '2920233765', celular: '2920206525', email: '' }
+            persona: { id: 5, nro_documento: '23345674', nombre: 'Jose', apellido: 'Ponce', lugar: { localidadid: 2, calle: 'San luis', altura: '1187', barrio: 'Fatima', localidad: "Bariloche" }, lista_red_social: [{tipo_red_socialid:2, tipo_red_social: "Instagram", perfil:"https://www.instagram.com/joseponce", icono_class: "fab fa-facebook-square"}], telefono: '2920233765', celular: '2920206525', email: '' }
           }
         ];
         let tipoRedSocial = [

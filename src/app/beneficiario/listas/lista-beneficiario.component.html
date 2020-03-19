@@ -20,9 +20,11 @@
         <td scope="col" colspan="2">{{beneficiario.persona.apellido}}, {{beneficiario.persona.nombre}}</td>
         <td scope="col">
           <div class="btn-group">
-            <button type="button" class="btn btn-outline-secondary btn-sm"><i class="fa fa-home"></i></button>
-            <button type="button" class="btn btn-outline-secondary btn-sm"><i class="fa fa-phone"></i></button>
-            <button type="button" class="btn btn-outline-secondary btn-sm"><i class="fab fa-facebook-square"></i></button>
+            <button type="button" class="btn btn-outline-secondary btn-sm" tooltipClass="tooltip-inner" ngbTooltip="{{getDireccion(beneficiario.persona.lugar)}}" container="body"><i class="fa fa-home"></i></button>
+            <button *ngIf="(beneficiario.persona.telefono != '')" type="button" class="btn btn-outline-secondary btn-sm" ngbTooltip="{{beneficiario.persona.telefono}}" container="body"><i class="fa fa-phone"></i></button>
+            <button *ngIf="(beneficiario.persona.celular != '')" type="button" class="btn btn-outline-secondary btn-sm"><i class="fas fa-mobile-alt" ngbTooltip="{{beneficiario.persona.celular}}" container="body"></i></button>
+            <button *ngIf="(beneficiario.persona.email != '')" type="button" class="btn btn-outline-secondary btn-sm" ngbTooltip="{{beneficiario.persona.email}}" container="body"><i class="far fa-envelope"></i></button>
+            <a *ngFor="let redSocial of beneficiario.persona.lista_red_social" href="{{redSocial.perfil}}" target="_blank" class="btn btn-outline-secondary btn-sm" ngbTooltip="Click para ir a perfil" container="body"><i class="{{redSocial.icono_class}}"></i></a>
           </div>
         </td>
         <td scope="col">{{beneficiario.persona.lugar.localidad}}</td>
@@ -37,15 +39,4 @@
         </td>
       </tr>
     </tbody>
-    <!--
-
-
-        <td scope="col"><a href="{{redsocial.perfil}}" target="_blank">{{redsocial.perfil}}</a></td>
-        <td scope="col">{{redsocial.tipo_red_social}}</td>
-        <td scope="col">
-            <button class="btn btn-sm btn-light" ><i class="{{redsocial.icono_class}}"></i></button>
-        </td>
-        <td *ngIf="mostrarBoton" scope="col" class="text-center"><borrar-red-social-component (borrarRedSocial)="borrar(i,$event)" ></borrar-red-social-component></td>
-      </tr>
-    </tbody> -->
   </table>

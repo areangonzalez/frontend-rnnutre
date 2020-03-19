@@ -11,6 +11,13 @@ export class ListaBeneficiarioComponent implements OnInit {
 
   ngOnInit(){}
 
+  getDireccion(lugar:any) {
+    let direccion: string = "";
+    direccion = lugar["calle"] + " " + lugar["altura"];
+
+    return direccion;
+  }
+
 
   /* public agregarBeneficiario(redSocial:any) {
     this.listadoBeneficiario.push(redSocial);
