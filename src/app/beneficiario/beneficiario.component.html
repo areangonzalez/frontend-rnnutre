@@ -1,5 +1,5 @@
 <h2>hola beneficiario</h2>
 
 <div class="bg-white rounded p-2">
-  <lista-beneficiario [ListadoBeneficiario]="listaBeneficiario" [configurarPaginacion]="configPaginacion"></lista-beneficiario>
+  <lista-beneficiario [ListadoBeneficiario]="listaBeneficiario" [configurarPaginacion]="configPaginacion" (cambioDePagina)="cambiarPagina($event)"></lista-beneficiario>
 </div>

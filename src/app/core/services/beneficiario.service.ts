@@ -22,6 +22,16 @@ export class BeneficiarioService {
         return this._apiService.post('/beneficiarios', params);
       }
     }
+    /**
+     * busco los beneficiarios segun criterio de busqueda
+     * @param params criterios de busqueda de un beneficiario
+     */
+    buscar(params:any) {
+      let httpParams = new HttpParams();
+      httpParams = this._apiService.formatParams(httpParams, params);
+
+      return this._apiService.get('/beneficiarios', httpParams);
+    }
 
     resolve(
       route: ActivatedRouteSnapshot,

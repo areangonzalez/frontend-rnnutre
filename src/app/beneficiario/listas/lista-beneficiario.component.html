@@ -48,9 +48,5 @@
   </table>
 
   <div class="d-flex justify-content-center">
-    <!-- <div class="d-flex align-items-center p-2 font-weight-bold">
-        <span *ngIf="configurarPaginacion.totalRegistros > 0">Destinatario/s: {{configurarPaginacion.cantRegistros}} - {{configurarPaginacion.totalRegistros}} de {{configurarPaginacion.colleccionSize}}</span>
-        <span *ngIf="configurarPaginacion.totalRegistros == 0">Áreas de entrenamiento/s: {{configurarPaginacion.cantRegistros}}</span>
-    </div> -->
     <ngb-pagination *ngIf="(configurarPaginacion.colleccionSize > 0)" class="mt-3 mb-0"  [collectionSize]="configurarPaginacion.colleccionSize" [(page)]="configurarPaginacion.page" [pageSize]="configurarPaginacion.pageSize" [maxSize]="10" [rotate]="true" [ellipses]="false" [boundaryLinks]="true" (pageChange)="cambioPagina(configurarPaginacion.page)"></ngb-pagination>
   </div>
