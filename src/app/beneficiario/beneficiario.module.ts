@@ -7,11 +7,12 @@ import { BeneficiarioRoutingModule } from "./beneficiario-routing.module";
 
 import { BeneficiarioComponent } from './beneficiario.component';
 import { ListaBeneficiarioComponent } from "./listas";
+import { BuscarBeneficiarioComponent } from './buscar';
 
 // Metadatos del módulo
 @NgModule({
   declarations: [
-    BeneficiarioComponent, ListaBeneficiarioComponent
+    BeneficiarioComponent, ListaBeneficiarioComponent, BuscarBeneficiarioComponent
   ],
   imports: [
     CommonModule, NgbModule, SharedModule, BeneficiarioRoutingModule

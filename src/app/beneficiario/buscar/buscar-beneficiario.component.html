@@ -1,0 +1,46 @@
+<div class="row p-2">
+  <div class="col-md-12">
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="Buscar por número documento, apellido y nombre de beneficiario" >
+      <div class="input-group-append">
+        <button type="button" class="btn btn-outline-primary" ngbTooltip="Buscar"><i class="fa fa-search"></i></button>
+        <button class="btn btn-outline-danger" ngbTooltip="Limpiar campos"><i class="fa fa-trash-alt"></i></button>
+      </div>
+    </div>
+  </div>
+</div>
+<form class="pl-2 pr-2">
+  <div class="row mb-0">
+    <div class="col-md-12 inner">
+      <p>
+        <button class="btn btn-outline-primary" (click)="abrirCerrarBusquedaAvanzada()">B&uacute;squeda Avanzada</button>
+      </p>
+      <div [@abrirCerrar]="state" id="busqueda_avanzada_beneficiario">
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-4">
+                <select class="form-control">
+                  <option value="">Seleccionar Localidad</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <input class="form-control" type="text" placeholder="calle">
+              </div>
+              <div class="col-md-4">
+                <input class="form-control" type="text" placeholder="barrio">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <select class="form-control">
+                  <option value="">Seleccionar Estado</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
