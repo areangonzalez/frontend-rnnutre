@@ -17,8 +17,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         ];
         let beneficiario = [
           {
-            id: 1, personaid: 2, estado: "admitido", cantidad_hijo: 3, edad_por_hijo: '12, 13, 15',
-            persona: { id:2, nro_documento: '29857364', nombre: 'Marcos', apellido: 'Gonzalez', lugar: { localidadid: 2, calle: 'cipolletti', altura: '232', barrio: 'san martin', localidad: "Bariloche" }, lista_red_social: [], telefono: '2920634455', celular: '', email: '' }
+            id: 1, personaid: 2, estado: "pendiente", cantidad_hijo: 3, edad_por_hijo: '12, 13, 15',
+            persona: { id:2, nro_documento: '29857364', nombre: 'Marcos', apellido: 'Gonzalez', lugar: { localidadid: 9, calle: 'cipolletti', altura: '232', barrio: 'san martin', localidad: "Viedma" }, lista_red_social: [], telefono: '2920634455', celular: '', email: '' }
           },
           {
             id: 2, personaid: 3, estado: "admitido", cantidad_hijo: 1, edad_por_hijo: '12',
@@ -26,10 +26,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
           },
           {
             id: 3, personaid: 4, estado: "admitido", cantidad_hijo: 2, edad_por_hijo: '12, 15',
-            persona: { id: 4, nro_documento: '28765434', nombre: 'Carlos', apellido: 'Fernandez', lugar: { localidadid: 2, calle: 'Moreno', altura: '33', barrio: 'Mitre', localidad: "Bariloche" }, lista_red_social: [], telefono: '2920202934', celular: '2920202033', email: '' }
+            persona: { id: 4, nro_documento: '28765434', nombre: 'Carlos', apellido: 'Fernandez', lugar: { localidadid: 9, calle: 'Moreno', altura: '33', barrio: 'Mitre', localidad: "Viedma" }, lista_red_social: [], telefono: '2920202934', celular: '2920202033', email: '' }
           },
           {
-            id: 4, personaid: 5, estado: "admitido", cantidad_hijo: 5, edad_por_hijo: '12, 13, 15, 22, 6',
+            id: 4, personaid: 5, estado: "pendiente", cantidad_hijo: 5, edad_por_hijo: '12, 13, 15, 22, 6',
             persona: { id: 5, nro_documento: '23345674', nombre: 'Jose', apellido: 'Ponce', lugar: { localidadid: 2, calle: 'San luis', altura: '1187', barrio: 'Fatima', localidad: "Bariloche" }, lista_red_social: [{tipo_red_socialid:2, tipo_red_social: "Instagram", perfil:"https://www.instagram.com/joseponce", icono_class: "fab fa-facebook-square"}], telefono: '2920233765', celular: '2920206525', email: '' }
           }
         ];
@@ -135,12 +135,12 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
             // GET BEEFICIARIOS
             if (request.url.endsWith('/apimock/beneficiarios') && request.method === 'GET') {
-              // paginacion
               // let pageSize: number = parseInt(request.params.get('pagesize'));
               let page: number = parseInt(request.params.get("page"));
               let pageSize: number = 2;
               // parametros de busqueda
               let localidadid = request.params.get('localidadid');
+              let estado = request.params.get('estado');
               let global_search = request.params.get('global_param');
               let search = [''];
               if(global_search) {
@@ -155,29 +155,53 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 "resultado": [],
               };
 
-               // despues de la busqueda
-              // let totalFiltrado: number = beneficiariosEncontrados.length;
-              let totalFiltrado: number = beneficiario.length;
+              // aplico la busqueda para el array de beneficiario
+              let beneficiariosEncontrados = beneficiario.filter(
+              beneficiario => {
+                for (let i = 0; i < search.length; i++) {
+                  let nombre = beneficiario.persona.nombre.split(" ");
+                  for (let j = 0; j < nombre.length; j++) {
+                      if ( nombre[j].toLowerCase().indexOf(search[i].toLowerCase()) > -1  ) {
+                        return beneficiario;
+                      }
+                  }
+                  if (beneficiario.persona.nro_documento.toLowerCase().indexOf(search[i].toLowerCase()) > -1 ){
+                    return beneficiario;
+                  }
+                  if ( beneficiario.persona.apellido.toLowerCase().indexOf(search[i].toLowerCase()) > -1 ) {
+                    return beneficiario;
+                  }
+                }
+              });
+              if (localidadid) {
+                beneficiariosEncontrados = beneficiariosEncontrados.filter(beneficiario => { return parseInt(localidadid) === beneficiario.persona.lugar.localidadid; });
+              }
+              if (estado) {
+                beneficiariosEncontrados = beneficiariosEncontrados.filter(beneficiario => { return estado === beneficiario.estado; });
+              }
+
+              // despues de la busqueda
+              let totalFiltrado: number = beneficiariosEncontrados.length;
+              //let totalFiltrado: number = beneficiario.length;
               let total:number = totalFiltrado/pageSize;
               let numEntero = Math.floor(total);
               let totalPagina:number = (total > numEntero) ? numEntero + 1 : total;
 
-              // filtroBeneficiario.total_filtrado = beneficiariosEncontrados.length;
-              filtroBeneficiario.total_filtrado = beneficiario.length;
+              filtroBeneficiario.total_filtrado = beneficiariosEncontrados.length;
+              //filtroBeneficiario.total_filtrado = beneficiario.length;
               filtroBeneficiario.pages = totalPagina;
-              // filtroBeneficiario.resultado = beneficiariosEncontrados;
-              filtroBeneficiario.resultado = beneficiario;
-              console.log(filtroBeneficiario);
+              filtroBeneficiario.resultado = beneficiariosEncontrados;
+              //filtroBeneficiario.resultado = beneficiario;
               // Armo el paginado
               if (page > 0) {
                 page = page;
                 let pageStart = page * pageSize;
                 let pageEnd = pageStart + pageSize;
-                // filtroBeneficiario.resultado = beneficiariosEncontrados.slice(pageStart, pageEnd);
-                filtroBeneficiario.resultado = beneficiario.slice(pageStart, pageEnd);
+                filtroBeneficiario.resultado = beneficiariosEncontrados.slice(pageStart, pageEnd);
+                //filtroBeneficiario.resultado = beneficiario.slice(pageStart, pageEnd);
               }else{
-                // filtroBeneficiario.resultado = beneficiariosEncontrados.slice(0,pageSize);
-                filtroBeneficiario.resultado = beneficiario.slice(0,pageSize);
+                filtroBeneficiario.resultado = beneficiariosEncontrados.slice(0,pageSize);
+                // filtroBeneficiario.resultado = beneficiario.slice(0,pageSize);
               }
 
               // respond 200 OK
