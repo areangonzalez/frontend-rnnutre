@@ -1,40 +1,42 @@
 <div class="row p-2">
   <div class="col-md-12">
     <div class="input-group">
-      <input type="text" class="form-control" placeholder="Buscar por número documento, apellido y nombre de beneficiario" >
+      <input type="text" class="form-control" [(ngModel)]="global_param" placeholder="Buscar por número documento, apellido y nombre de beneficiario" (keyup.enter)="buscar()" [ngClass]="{'campo-seleccionado': resaltarCampo(global_param)}">
       <div class="input-group-append">
-        <button type="button" class="btn btn-outline-primary" ngbTooltip="Buscar"><i class="fa fa-search"></i></button>
-        <button class="btn btn-outline-danger" ngbTooltip="Limpiar campos"><i class="fa fa-trash-alt"></i></button>
+        <button type="button" class="btn btn-outline-primary" ngbTooltip="Buscar" (click)="buscar()"><i class="fa fa-search"></i></button>
+        <button class="btn btn-outline-danger" (click)="limpiarCampos()" ngbTooltip="Limpiar campos"><i class="fa fa-trash-alt"></i></button>
       </div>
     </div>
   </div>
 </div>
-<form class="pl-2 pr-2">
+<form class="pl-2 pr-2" [formGroup]="busquedaAvanzadaForm">
   <div class="row mb-0">
     <div class="col-md-12 inner">
       <p>
-        <button class="btn btn-outline-primary" (click)="abrirCerrarBusquedaAvanzada()">B&uacute;squeda Avanzada</button>
+        <button class="btn" [ngClass]="{'btn-outline-success': realizoBusqueda, 'btn-outline-primary': !realizoBusqueda}" (click)="abrirCerrarBusquedaAvanzada()">B&uacute;squeda Avanzada</button>
       </p>
       <div [@abrirCerrar]="state" id="busqueda_avanzada_beneficiario">
         <div class="card">
           <div class="card-body">
             <div class="row">
               <div class="col-md-4">
-                <select class="form-control">
+                <select class="form-control" formControlName="localidadid" [ngClass]="{'campo-seleccionado': resaltarCampo(busquedaAvanzadaForm.get('localidadid').value)}">
                   <option value="">Seleccionar Localidad</option>
                 </select>
               </div>
               <div class="col-md-4">
-                <input class="form-control" type="text" placeholder="calle">
+                <input class="form-control" type="text" placeholder="calle" formControlName="calle" [ngClass]="{'campo-seleccionado': resaltarCampo(busquedaAvanzadaForm.get('calle').value)}">
               </div>
               <div class="col-md-4">
-                <input class="form-control" type="text" placeholder="barrio">
+                <input class="form-control" type="text" placeholder="barrio" formControlName="barrio" [ngClass]="{'campo-seleccionado': resaltarCampo(busquedaAvanzadaForm.get('barrio').value)}">
               </div>
             </div>
             <div class="row">
               <div class="col-md-4">
-                <select class="form-control">
+                <select class="form-control" formControlName="estado" [ngClass]="{'campo-seleccionado': resaltarCampo(busquedaAvanzadaForm.get('estado').value)}">
                   <option value="">Seleccionar Estado</option>
+                  <option value="pendiente">Pendiente</option>
+                  <option value="admitido">Admitido</option>
                 </select>
               </div>
             </div>
