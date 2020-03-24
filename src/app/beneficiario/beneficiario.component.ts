@@ -53,4 +53,9 @@ export class BeneficiarioComponent implements OnInit {
     )
   }
 
+  limpiarCampos(limpiar:boolean){
+    this.buscar({}, 1);
+  }
+
+
 }

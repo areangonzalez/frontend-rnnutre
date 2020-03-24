@@ -1,12 +1,8 @@
 <div class="bg-white p-2 mb-3 rounded">
   <h2 class="mb-1">Beneficiarios</h2>
 </div>
-
-
-
 <div class="bg-white rounded p-2">
-
-  <buscar-beneficiario></buscar-beneficiario>
+  <buscar-beneficiario (obtenerBusqueda)="buscar($event, configPaginacion.page)" (limpiar)="limpiarCampos()"></buscar-beneficiario>
 
   <lista-beneficiario [ListadoBeneficiario]="listaBeneficiario" [configurarPaginacion]="configPaginacion" (cambioDePagina)="cambiarPagina($event)"></lista-beneficiario>
 </div>

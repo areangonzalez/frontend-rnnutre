@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { FormGroup, FormBuilder } from '@angular/forms';
 
@@ -19,6 +19,8 @@ import { FormGroup, FormBuilder } from '@angular/forms';
     ]
 })
 export class BuscarBeneficiarioComponent implements OnInit {
+  @Output("obtenerBusqueda") public obtenerBusqueda = new EventEmitter();
+  @Output("limpiar") public limpiar = new EventEmitter();
   public state: string = 'small'; // estado de la animacion
   public realizoBusqueda: boolean = false; // aplica filtro a boton de busqueda avanzada
   public global_param: string = ""; // parametro de busqueda global para beneficiario
@@ -48,7 +50,7 @@ export class BuscarBeneficiarioComponent implements OnInit {
     let busquedaAvanzada = this.busquedaAvanzadaForm.value;
     let apiBusqueda: any= {};
     let esTrue: boolean = false;
-    console.log(busquedaAvanzada);
+
     if (this.global_param !== '') {
       Object.assign(apiBusqueda, {"global_param": this.global_param});
     }
@@ -58,10 +60,10 @@ export class BuscarBeneficiarioComponent implements OnInit {
         esTrue = true;
       }
     }
-    console.log(esTrue);
+
     this.realizoBusqueda = esTrue;
     this.state = (esTrue) ? 'large' : 'small';
-    //this.obtenerBusqueda.emit(apiBusqueda);
+    this.obtenerBusqueda.emit(apiBusqueda);
   }
   /**
    * Limpiar los campos de busqueda
@@ -81,7 +83,7 @@ export class BuscarBeneficiarioComponent implements OnInit {
     this.busquedaAvanzadaForm.patchValue(busqueda);
     this.realizoBusqueda = false;
     this.state = 'small';
-    //this.limpiar.emit(true);
+    this.limpiar.emit(true);
   }
   /**
      * Resalta los campos que han sido utilizados en búsqueda
