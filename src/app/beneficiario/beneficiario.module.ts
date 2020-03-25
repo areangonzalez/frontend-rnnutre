@@ -8,17 +8,19 @@ import { BeneficiarioRoutingModule } from "./beneficiario-routing.module";
 import { BeneficiarioComponent } from './beneficiario.component';
 import { ListaBeneficiarioComponent } from "./listas";
 import { BuscarBeneficiarioComponent } from './buscar';
+import { ModalEditarBeneficiarioContent, EditarBeneficiarioModalComponent } from "./editar-beneficiario";
 
 // Metadatos del módulo
 @NgModule({
   declarations: [
-    BeneficiarioComponent, ListaBeneficiarioComponent, BuscarBeneficiarioComponent
+    BeneficiarioComponent, ListaBeneficiarioComponent, BuscarBeneficiarioComponent, ModalEditarBeneficiarioContent, EditarBeneficiarioModalComponent
   ],
   imports: [
     CommonModule, NgbModule, SharedModule, BeneficiarioRoutingModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  exports: [
+  entryComponents: [
+    ModalEditarBeneficiarioContent, EditarBeneficiarioModalComponent
   ]
 
 })
