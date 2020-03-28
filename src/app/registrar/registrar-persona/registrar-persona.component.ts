@@ -42,7 +42,7 @@ export class RegistrarPersonaComponent implements OnInit {
           altura: ['', Validators.required],
           barrio: ['', Validators.required]
         })
-      })
+      });
     }
 
     ngOnInit(){

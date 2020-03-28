@@ -33,6 +33,10 @@ export class BeneficiarioService {
       return this._apiService.get('/beneficiarios', httpParams);
     }
 
+    buscarPorId(id:number) {
+      return this._apiService.get('/beneficiarios/' + id);
+    }
+
     resolve(
       route: ActivatedRouteSnapshot,
       state: RouterStateSnapshot,
