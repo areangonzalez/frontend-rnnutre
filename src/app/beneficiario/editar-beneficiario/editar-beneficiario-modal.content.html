@@ -9,7 +9,8 @@
   <formulario-contacto [contacto]="beneficiario.get('contacto')" [listaRedSocial]="listaRedSocial" [submited]="submitted" ></formulario-contacto>
   <formulario-lugar [lugar]="beneficiario.get('lugar')" [submited]="submitted" [localidades]="listaLocalidades" ></formulario-lugar>
 </div>
-<div class="modal-footer">
-  <button type="button" class="btn btn-danger" (click)="activeModal.close('closed')"></button>
-  <button type="button" class="btn btn-success" (click)="validarFormulario()" ></button>
+<hr class="pt1">
+<div class="d-flex justify-content-between pl-3 pr-3 pb-3">
+  <button type="button" class="btn btn-danger" (click)="activeModal.close('closed')"><i class="far fa-times-circle"></i> Cancelar</button>
+  <button type="button" class="btn btn-success" (click)="validarFormulario()" ><i class="fa fa-save" title="Guardar"></i> Guardar</button>
 </div>

@@ -19,8 +19,9 @@ export class ModalEditarBeneficiarioContent {
 
   constructor(public activeModal: NgbActiveModal, private _mensajeService: MensajeService, private modalService: NgbModal, private _beneficiarioService: BeneficiarioService){}
 
-  /* this.activeModal.close(datos); */
-
+  /**
+   * valido el formulario antes de confirmar los datos
+   */
   validarFormulario() {
     this.submitted = true;
 
@@ -38,7 +39,10 @@ export class ModalEditarBeneficiarioContent {
       this.confirmacion(persona);
     }
   }
-
+  /**
+   * abro modal para visualizar los datos y confirmar los mismos
+   * @param datos datos del beneficiario
+   */
   confirmacion(datos:any) {
     const confirmarDatos = this.modalService.open(ModalConfirmarBeneficiarioContent, {size: 'lg', centered: true});
     confirmarDatos.componentInstance.datos = datos;
@@ -49,15 +53,24 @@ export class ModalEditarBeneficiarioContent {
     });
 
   }
-
+  /**
+   * edito a un beneficiario
+   * @param params datos del beneficiarios
+   * @param id identificador del beneficiario a editar
+   */
   guardarBeneficiario(params, id){
     this._beneficiarioService.guardar(params, id).subscribe(
       respuesta => {
         // obtengo la respuesta y cierro el modal si confirma el guardado
+        this._mensajeService.exitoso("Se han guardado los cambios con exito!!", [{name: ''}]);
+        this.activeModal.close();
       },error => { this._mensajeService.cancelado(error, [{name: ''}]); }
     )
   }
-
+  /**
+   * busco el nombre de la localidad seleccionada en el formulario por su id
+   * @param id identificador de la localidad
+   */
   conseguirLocalidadPorId(id: any) {
     for (let i = 0; i < this.listaLocalidades.length; i++) {
       if (parseInt(this.listaLocalidades[i]["id"]) == parseInt(id) ) {
@@ -162,7 +175,7 @@ export class EditarBeneficiarioModalComponent {
   selector: 'modal-confirmar-beneficiario-content',
   template: `
     <div class="modal-header">
-      <h4 class="modal-title" id="modal-title">Confirmar datos beneficiario</h4>
+      <h4 class="modal-title" id="modal-title">Confirmación de datos</h4>
       <button type="button" class="close" aria-describedby="modal-title" (click)="cancelar()">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -170,9 +183,9 @@ export class EditarBeneficiarioModalComponent {
     <div class="modal-body">
       <vista-datos-persona [tamanioColumna]="'col-lg-9'" [datosPersona]="datos" ></vista-datos-persona>
     </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-outline-danger" (click)="cancelar()">Cancelar</button>
-      <button type="button" class="btn btn-success" (click)="confirmar()">Confirmar Datos</button>
+    <div class="d-flex justify-content-between pl-3 pr-3 pb-3">
+      <button type="button" class="btn btn-danger" (click)="cancelar()"><i class="far fa-times-circle"></i> Cancelar</button>
+      <button type="button" class="btn btn-success" (click)="confirmar()"><i class="fa fa-check-circle"></i> Confirmar</button>
     </div>
   `
 })

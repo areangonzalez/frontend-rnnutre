@@ -17,7 +17,7 @@ export class BeneficiarioService {
      */
     guardar(params: any, id:number) {
       if(id !== 0) {
-        // update
+        return this._apiService.put('/beneficiarios/' + id, params);
       }else{
         return this._apiService.post('/beneficiarios', params);
       }
