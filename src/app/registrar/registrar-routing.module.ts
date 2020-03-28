@@ -7,14 +7,15 @@ import { ConfirmarDatosComponent } from './confirmar';
 
 const routes: Routes = [
   {
-    path: '', component: BuscarPersonaComponent, data: { title: 'Buscar Persona' }
+    path: '', component: BuscarPersonaComponent, data: { loading: true, title: 'Buscar Persona' }
   },
   {
-    path: 'registrar-persona/:documento', component: RegistrarPersonaComponent, data: { title: 'Registrar Persona' },
+    path: 'registrar-persona/:documento', component: RegistrarPersonaComponent, data: {
+      loading: true, title: 'Registrar Persona' },
     resolve: { persona: PersonaService, localidad: LocalidadService }
   },
   {
-    path: 'confirmar-datos', component: ConfirmarDatosComponent, data: { title: 'Confirmar Datos' }
+    path: 'confirmar-datos', component: ConfirmarDatosComponent, data: { loading: true, title: 'Confirmar Datos' }
   }
 ]
 

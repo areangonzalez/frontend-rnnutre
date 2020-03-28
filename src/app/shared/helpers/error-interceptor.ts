@@ -3,19 +3,19 @@ import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpEventType } f
 import { Observable, throwError } from 'rxjs';
 import { catchError, finalize, tap } from 'rxjs/operators';
 import { environment } from "../../../environments/environment";
-import { /* LoaderService, AuthenticationService, */ /* JwtService */ } from 'src/app/core/services';
+import { LoaderService, /* AuthenticationService, */ /* JwtService */ } from 'src/app/core/services';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
     private envios = 0;
     private recibidos = 0;
     constructor(
-      /* private authenticationService: AuthenticationService, private _loadService: LoaderService, */
+      /* private authenticationService: AuthenticationService,*/ private _loadService: LoaderService,
       //private _jwtService: JwtService
       ) { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        /* this._loadService.show(); */
+        this._loadService.show();
         return next.handle(request).pipe(
           tap(res => {
             // res.type is prod and zero is dev
@@ -30,7 +30,7 @@ export class ErrorInterceptor implements HttpInterceptor {
               this.recibidos++;
               // comparo y si son iguales oculto el spinner
               if (this.envios == this.recibidos){
-                /* this._loadService.hide(); */
+                this._loadService.hide();
               }
             }
           }),
@@ -45,11 +45,11 @@ export class ErrorInterceptor implements HttpInterceptor {
               // auto logout if 401 response returned from api
               /* this.authenticationService.logout(); */
               location.reload(true);
-              /* this._loadService.hide(); */
+              this._loadService.hide();
             }
             if (err.status === 403) {
               // auto logout if 401 response returned from api
-              /* this._loadService.hide(); */
+              this._loadService.hide();
               let mensaje = "No tiene permitido ejecutar esta accion";
               return throwError(mensaje);
             }
@@ -57,11 +57,11 @@ export class ErrorInterceptor implements HttpInterceptor {
             if (err.status === 400){
               let mensaje = this.recorrerErrorObjeto(JSON.parse(err.error.message));
               // envio el mensaje como texto.
-              /* this._loadService.hide(); */
+              this._loadService.hide();
               return throwError(mensaje);
             }else{ // cualquier otro error
               const error = err.message || err.error.message || err.statusText;
-              /* this._loadService.hide(); */
+              this._loadService.hide();
               return throwError(error);
             }
           })

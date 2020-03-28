@@ -3,6 +3,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { SwappingSquaresSpinnerModule } from "angular-epic-spinners";
 
 
 // fake backend provider
@@ -14,19 +15,21 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { CoreModule } from "./core/core.module";
-import { AppLayoutComponent, MensajeComponent, SharedModule } from "./shared";
+import { AppLayoutComponent, MensajeComponent, SharedModule, LoaderComponent } from "./shared";
 
 
 @NgModule({
   declarations: [
     AppComponent,
     AppLayoutComponent,
-    MensajeComponent
+    MensajeComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     NgbModule,
+    SwappingSquaresSpinnerModule,
     AppRoutingModule,
     CoreModule,
     SharedModule,

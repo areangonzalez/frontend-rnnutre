@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import {
-  TitleService, ApiService, PersonaService, UtilService, TipoRedSocialService,
+  TitleService, LoaderService, ApiService, PersonaService, UtilService, TipoRedSocialService,
   LocalidadService, BeneficiarioService, MensajeService, DatosPersonaService, ConfiguracionParaPaginarService
 } from "./services";
 
@@ -11,7 +11,7 @@ import {
     CommonModule,
   ],
   providers: [
-    TitleService, ApiService, PersonaService, UtilService, TipoRedSocialService,
+    TitleService, LoaderService, ApiService, PersonaService, UtilService, TipoRedSocialService,
     LocalidadService, BeneficiarioService, MensajeService, DatosPersonaService, ConfiguracionParaPaginarService
   ],
 })
