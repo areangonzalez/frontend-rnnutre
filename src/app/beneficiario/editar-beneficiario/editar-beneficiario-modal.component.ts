@@ -3,6 +3,7 @@ import { NgbActiveModal, NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-boots
 import { BeneficiarioService, LocalidadService, MensajeService } from 'src/app/core/services';
 import { map } from 'rxjs/operators';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { PersonaModel } from 'src/app/core/models';
 
 
 @Component({
@@ -13,12 +14,59 @@ export class ModalEditarBeneficiarioContent {
   @Input("beneficiario") public beneficiario:FormGroup;
   @Input("listaRedSocial") public listaRedSocial:any;
   @Input("listaLocalidades") public listaLocalidades:any[];
-
   public submitted: boolean = false;
+  public personaModel = new PersonaModel();
 
-  constructor(public activeModal: NgbActiveModal){}
+  constructor(public activeModal: NgbActiveModal, private _mensajeService: MensajeService, private modalService: NgbModal, private _beneficiarioService: BeneficiarioService){}
 
   /* this.activeModal.close(datos); */
+
+  validarFormulario() {
+    this.submitted = true;
+
+    if (this.beneficiario.invalid) {
+      this._mensajeService.cancelado("Por favor complete los campos!!", [{name:''}]);
+      return;
+    }else{
+      // creo el modelo de persona como se define en la api
+      let persona: IPersona = this.personaModel.deserealize(this.beneficiario.value);
+      // asigno la lista red social al objeto persona
+      Object.assign(persona, {'lista_red_social': this.listaRedSocial});
+      // asigno el nombre de la localidad
+      persona.lugar.localidad = this.conseguirLocalidadPorId(persona.lugar.localidadid)
+
+      this.confirmacion(persona);
+    }
+  }
+
+  confirmacion(datos:any) {
+    const confirmarDatos = this.modalService.open(ModalConfirmarBeneficiarioContent, {size: 'lg', centered: true});
+    confirmarDatos.componentInstance.datos = datos;
+    confirmarDatos.result.then(result => {
+      if (result) {
+        this.guardarBeneficiario(datos, datos['id'])
+      }
+    });
+
+  }
+
+  guardarBeneficiario(params, id){
+    this._beneficiarioService.guardar(params, id).subscribe(
+      respuesta => {
+        // obtengo la respuesta y cierro el modal si confirma el guardado
+      },error => { this._mensajeService.cancelado(error, [{name: ''}]); }
+    )
+  }
+
+  conseguirLocalidadPorId(id: any) {
+    for (let i = 0; i < this.listaLocalidades.length; i++) {
+      if (parseInt(this.listaLocalidades[i]["id"]) == parseInt(id) ) {
+        return this.listaLocalidades[i]["nombre"];
+      }
+    }
+  }
+
+
 
 }
 
@@ -73,19 +121,9 @@ export class EditarBeneficiarioModalComponent {
   open() {
     this.buscarBeneficiarioPorId(this.idBeneficiario);
     const modalRef = this.modalService.open(ModalEditarBeneficiarioContent, { size: 'lg' });
-    console.log(this.lista_localidades);
     modalRef.componentInstance.beneficiario = this.beneficiarioForm;
     modalRef.componentInstance.listaRedSocial = this.lista_red_social;
     modalRef.componentInstance.listaLocalidades = this.listadoLocalidades;
-    modalRef.result.then(
-      (result) => {
-        if (result == 'closed'){
-        }else{
-          // obtengo el id persona desde el content.
-          /* return this.obtenerRedSocial.emit(result); */
-        }
-      }
-    )
   }
   /**
    * Obtengo los datos de un beneficiario por su id
@@ -119,3 +157,38 @@ export class EditarBeneficiarioModalComponent {
     }, error => { this._mensajeService.cancelado(error, [{name:''}]); });
   }
 }
+
+@Component({
+  selector: 'modal-confirmar-beneficiario-content',
+  template: `
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-title">Confirmar datos beneficiario</h4>
+      <button type="button" class="close" aria-describedby="modal-title" (click)="cancelar()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <vista-datos-persona [tamanioColumna]="'col-lg-9'" [datosPersona]="datos" ></vista-datos-persona>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-danger" (click)="cancelar()">Cancelar</button>
+      <button type="button" class="btn btn-success" (click)="confirmar()">Confirmar Datos</button>
+    </div>
+  `
+})
+export class ModalConfirmarBeneficiarioContent {
+  @Input("datos") public datos: any;
+
+
+  constructor(public activeModal: NgbActiveModal){}
+
+  cancelar(){
+    this.activeModal.close(false);
+  }
+
+  confirmar() {
+    this.activeModal.close(true);
+  }
+}
+
+

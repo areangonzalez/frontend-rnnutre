@@ -9,3 +9,7 @@
   <formulario-contacto [contacto]="beneficiario.get('contacto')" [listaRedSocial]="listaRedSocial" [submited]="submitted" ></formulario-contacto>
   <formulario-lugar [lugar]="beneficiario.get('lugar')" [submited]="submitted" [localidades]="listaLocalidades" ></formulario-lugar>
 </div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-danger" (click)="activeModal.close('closed')"></button>
+  <button type="button" class="btn btn-success" (click)="validarFormulario()" ></button>
+</div>

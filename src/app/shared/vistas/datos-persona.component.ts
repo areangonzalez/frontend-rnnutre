@@ -7,6 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class DatosPersonaComponent implements OnInit {
   @Input("datosPersona") public datosPersona: any;
+  @Input("tamanioColumna") public tamanioColumna: string;
 
     constructor(){}
 
