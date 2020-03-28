@@ -8,6 +8,7 @@ import { ConfigurarPagina } from '../../core/models';
 export class ListaBeneficiarioComponent implements OnInit {
   @Input("ListadoBeneficiario") public listadoBeneficiario: any;
   @Input('configurarPaginacion') public configurarPaginacion: ConfigurarPagina;
+  @Input('listaLocalidad') public lista_localidad: any;
   @Output("cambioDePagina") public cambioDePagina = new EventEmitter();
   constructor(){}
 

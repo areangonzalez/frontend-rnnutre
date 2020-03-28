@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { NgbActiveModal, NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
-import { BeneficiarioService } from 'src/app/core/services';
+import { BeneficiarioService, LocalidadService, MensajeService } from 'src/app/core/services';
 import { map } from 'rxjs/operators';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
@@ -11,6 +11,10 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class ModalEditarBeneficiarioContent {
   @Input("beneficiario") public beneficiario:FormGroup;
+  @Input("listaRedSocial") public listaRedSocial:any;
+  @Input("listaLocalidades") public listaLocalidades:any[];
+
+  public submitted: boolean = false;
 
   constructor(public activeModal: NgbActiveModal){}
 
@@ -27,18 +31,22 @@ export class ModalEditarBeneficiarioContent {
 })
 export class EditarBeneficiarioModalComponent {
   @Input("idBeneficiario") public idBeneficiario: number;
+  @Input("listadoLocalidades") public listadoLocalidades: any;
   public beneficiarioForm: FormGroup;
   public lista_red_social: any[] = [];
+  public lista_localidades: any = [];
 
   constructor(
     private modalService: NgbModal,
     private config: NgbModalConfig,
     private _beneficiarioService: BeneficiarioService,
-    private _fb: FormBuilder
+    private _fb: FormBuilder,
+    private _localidadService: LocalidadService,
+    private _mensajeService: MensajeService
   ) {
     config.backdrop = 'static';
     config.keyboard = false;
-
+    // Formulario de beneficiario
     this.beneficiarioForm = _fb.group({
       id:'',
       nro_documento: ['', [Validators.required, Validators.minLength(7)]],
@@ -59,12 +67,16 @@ export class EditarBeneficiarioModalComponent {
       })
     });
   }
-
+  /**
+   * abro el modal con los datos que necesita
+   */
   open() {
     this.buscarBeneficiarioPorId(this.idBeneficiario);
     const modalRef = this.modalService.open(ModalEditarBeneficiarioContent, { size: 'lg' });
+    console.log(this.lista_localidades);
     modalRef.componentInstance.beneficiario = this.beneficiarioForm;
     modalRef.componentInstance.listaRedSocial = this.lista_red_social;
+    modalRef.componentInstance.listaLocalidades = this.listadoLocalidades;
     modalRef.result.then(
       (result) => {
         if (result == 'closed'){
@@ -75,8 +87,10 @@ export class EditarBeneficiarioModalComponent {
       }
     )
   }
-
-
+  /**
+   * Obtengo los datos de un beneficiario por su id
+   * @param id identificador del beneficiario
+   */
   buscarBeneficiarioPorId(id:number) {
     this._beneficiarioService.buscarPorId(id).pipe(map(
       vBeneficiario => {
@@ -100,12 +114,8 @@ export class EditarBeneficiarioModalComponent {
       }))
     .subscribe(
       respuesta => {
-        console.log("obtengo datos de servicio en modal: ",respuesta);
         this.lista_red_social = respuesta["lista_red_social"];
         this.beneficiarioForm.patchValue(respuesta);
-    }, error => { console.log(error); });
+    }, error => { this._mensajeService.cancelado(error, [{name:''}]); });
   }
-
-
-
 }

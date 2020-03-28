@@ -12,6 +12,7 @@ export class BeneficiarioComponent implements OnInit {
   public configPaginacion: ConfigurarPagina = new ConfigurarPagina(); // obtiene el objeto de configuracion de rango y paginado del listado de beneficiario
   public pagina: number = 1;
   public filtradoBusqueda:any = {}; // variable que mantiene el filtro de busqueda
+  public lista_localidad: any = [];
 
   constructor(
     private _route: ActivatedRoute, private _confPaginacion: ConfiguracionParaPaginarService, private _beneficiarioService: BeneficiarioService, private _mensajeService: MensajeService
@@ -19,6 +20,7 @@ export class BeneficiarioComponent implements OnInit {
 
   ngOnInit(){
     this.config(this._route.snapshot.data['beneficiarios'], 1);
+    this.lista_localidad = this._route.snapshot.data['localidades'];
   }
 
   /**

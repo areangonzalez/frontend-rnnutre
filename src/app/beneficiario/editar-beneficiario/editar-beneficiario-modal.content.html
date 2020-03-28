@@ -5,9 +5,7 @@
   </button>
 </div>
 <div class="modal-body">
-  {{ beneficiario.value | json  }}
-  <!-- <formulario-persona></formulario-persona>
-  <formulario-contacto></formulario-contacto>
-  <formulario-red-social></formulario-red-social>
-  <formulario-lugar></formulario-lugar> -->
+  <formulario-persona [persona]="beneficiario" [documento]="beneficiario.get('nro_documento').value" [submited]="submitted" ></formulario-persona>
+  <formulario-contacto [contacto]="beneficiario.get('contacto')" [listaRedSocial]="listaRedSocial" [submited]="submitted" ></formulario-contacto>
+  <formulario-lugar [lugar]="beneficiario.get('lugar')" [submited]="submitted" [localidades]="listaLocalidades" ></formulario-lugar>
 </div>
