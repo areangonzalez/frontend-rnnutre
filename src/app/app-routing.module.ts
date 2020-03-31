@@ -28,7 +28,7 @@ const routes: Routes = [
       loadChildren: './beneficiario/beneficiario.module#BeneficiarioModule'
     }]
   },
-  //{ path: 'login', data: { title: "Iniciar sesión" }, loadChildren: './login/login.module#LoginModule' },
+  { path: 'login', data: { title: "Iniciar sesión" }, loadChildren: './login/login.module#LoginModule' },
   { path: '**', redirectTo: 'buscar-persona', pathMatch: 'full' },
 ]
 
