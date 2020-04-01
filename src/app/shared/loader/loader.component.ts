@@ -40,7 +40,6 @@ export class LoaderComponent implements OnInit, OnDestroy {
 
         const hashData = (route.routeConfig && route.routeConfig.data && route.routeConfig.data.hasOwnProperty(ROUTE_DATA_LOADING));
 
-        console.log(loading);
         if(hashData){
           loading = route.routeConfig.data[ROUTE_DATA_LOADING];
         }

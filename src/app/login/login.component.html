@@ -5,18 +5,22 @@
         <div class="col-12 text-programa">
           <h3>RN Nutre</h3>
         </div>
-        <form class="col-12">
+        <form [formGroup]="loginForm" class="col-12">
           <div class="form-group" id="user-group">
-            <input type="text" class="form-control" placeholder="Nombre de usuario">
+            <input type="text" class="form-control" [ngClass]="{'is-invalid': (msjUsuario != '' && loginForm.get('username').invalid)}" formControlName="username" placeholder="Nombre de usuario">
           </div>
           <div class="form-group" id="pass-group">
-            <input type="password" class="form-control" placeholder="Contraseña">
+            <input type="password" class="form-control" [ngClass]="{'is-invalid': (msjPass != '' && loginForm.get('password').invalid)}" formControlName="password" placeholder="Contraseña">
           </div>
-          <button type="button" class="btn btn-primary form-control"><i class="fas fa-sign-in-alt"></i> Ingresar</button>
+          <div class="text-danger mb-3">
+              <span *ngIf="loginForm.get('username').hasError('required')">{{msjUsuario}}</span>
+              <span *ngIf="loginForm.get('password').hasError('required')">{{msjPass}}</span>
+          </div>
+          <button type="button" class="btn btn-primary form-control" (click)="ingresar()"><i class="fas fa-sign-in-alt" ></i> Ingresar</button>
         </form>
         <div class="col-12 d-flex justify-content-between logo-img">
           <img src="../../assets/img/logoRN.svg" alt="Río Negro">
-          <span class="text-capitalize">DESARROLLO HUMANO Y ARTICULACIÓN SOLIDARIA</span>
+          <span class="text-uppercase">DESARROLLO HUMANO Y ARTICULACIÓN SOLIDARIA</span>
         </div>
       </div>
     </div>
