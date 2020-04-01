@@ -3,18 +3,19 @@ import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpEventType } f
 import { Observable, throwError } from 'rxjs';
 import { catchError, finalize, tap } from 'rxjs/operators';
 import { environment } from "../../../environments/environment";
-import { LoaderService, /* AuthenticationService, */ /* JwtService */ } from 'src/app/core/services';
+import { LoaderService, AuthenticationService } from 'src/app/core/services';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
     private envios = 0;
     private recibidos = 0;
     constructor(
-      /* private authenticationService: AuthenticationService,*/ private _loadService: LoaderService,
-      //private _jwtService: JwtService
+      private authenticationService: AuthenticationService, private _loadService: LoaderService
       ) { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+      console.log("recibidos: ",this.recibidos);
+      console.log("envios: ",this.envios);
         this._loadService.show();
         return next.handle(request).pipe(
           tap(res => {
@@ -35,15 +36,12 @@ export class ErrorInterceptor implements HttpInterceptor {
             }
           }),
           catchError(err => {
-            // verifico si existe el acceso del usuario
-            /* let accessUser = this._jwtService.getToken();
-            if (accessUser && accessUser.datosToken){
-            } */
+            // sumo los errores recibidos
             this.recibidos++;
             // error de inahutorizado
             if (err.status === 401) {
               // auto logout if 401 response returned from api
-              /* this.authenticationService.logout(); */
+              this.authenticationService.logout();
               location.reload(true);
               this._loadService.hide();
             }

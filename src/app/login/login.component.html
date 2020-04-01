@@ -15,6 +15,9 @@
           <div class="text-danger mb-3">
               <span *ngIf="loginForm.get('username').hasError('required')">{{msjUsuario}}</span>
               <span *ngIf="loginForm.get('password').hasError('required')">{{msjPass}}</span>
+              <span *ngIf="errorAutenticacion">
+                Por verifique sus datos.
+              </span>
           </div>
           <button type="button" class="btn btn-primary form-control" (click)="ingresar()"><i class="fas fa-sign-in-alt" ></i> Ingresar</button>
         </form>

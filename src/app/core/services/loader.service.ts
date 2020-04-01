@@ -18,13 +18,10 @@ export class LoaderService {
 
 
     show() {
-      console.log("Muestra");
-
-        this.loaderSubject.next(<LoaderState>{show: true});
+      this.loaderSubject.next(<LoaderState>{show: true});
     }
 
     hide() {
-      console.log("Oculta");
-        this.loaderSubject.next(<LoaderState>{show: false});
+      this.loaderSubject.next(<LoaderState>{show: false});
     }
 }

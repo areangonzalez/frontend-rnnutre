@@ -9,3 +9,5 @@ export * from './tipo-red-social.service';
 export * from './localidad.service';
 export * from './beneficiario.service';
 export * from './datos-persona.service';
+export * from './authentication.service';
+export * from './jwt.service';
