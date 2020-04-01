@@ -5,15 +5,32 @@
   <a class="navbar-brand" [routerLink]="['/']">
       <img src="../../../assets/img/logoRN.svg" width="60" height="40" alt="Desarrollo humano y articulación solidaria"> <span>NUTRE</span>
   </a>
-  <div class="collapse navbar-collapse" id="navbarCollapse" [ngbCollapse]="isCollapsed">
-      <ul class="navbar-nav flex-row ml-md-auto d-md-flex">
-        <li class="nav-item" [routerLinkActive]="['active']" (click)="isCollapsed = !isCollapsed">
-          <a class="nav-link" [routerLink]="['/login']"> <!-- [ngClass]="{'isCollapse': !isCollapse}" -->
-            <i class="fas fa-sign-in-alt"></i> Iniciar Sesion</a>
-        </li>
-        <!-- <li class="nav-item">
-            <a class="nav-link" [routerLink]="['login']" (click)="cerrarSesion()"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
-        </li> -->
+
+  <div class="collapse navbar-collapse" id="navbarCollapse" [ngbCollapse]="isCollapsed" *ngIf="estoyLogueado">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" [routerLinkActive]="['active']" (click)="isCollapsed = !isCollapsed;">
+        <a class="nav-link" [routerLink]="['/buscar-persona']" ><i class="fas fa-search"></i> Buscar persona</a>
+      </li>
+      <li class="nav-item" [routerLinkActive]="['active']" (click)="isCollapsed = !isCollapsed;">
+        <a class="nav-link" [routerLink]="['/beneficiario']" ><i class="fas fa-users"></i> Beneficiarios</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav flex-row ml-md-auto d-md-flex" *ngIf="!estoyLogueado">
+      <li class="nav-item" [routerLinkActive]="['active']" (click)="isCollapsed = !isCollapsed">
+        <a class="nav-link" [routerLink]="['/login']">
+          <i class="fas fa-sign-in-alt"></i> Iniciar Sesion</a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/login']" (click)="cerrarSesion()"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav flex-row ml-md-auto d-md-flex" *ngIf="estoyLogueado">
+      <div ngbDropdown placement="bottom-right" class="d-inline-block">
+          <button class="btn btn-outline-primary-dp btn-margin-dropdown" id="dropdownBasic1" ngbDropdownToggle [ngClass]="{'btn-dropdown-menu': isCollapsed}" ><i class="fas fa-user-tie"></i> {{nombreUsuario}}</button>
+          <div ngbDropdownMenu aria-labelledby="dropdownBasic1" [ngClass]="{'btn-dropdown-submenu': isCollapsed}">
+              <li class="dropdown-item"><a class="nav-link" (click)="cerrarSesion()"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a></li>
+          </div>
+      </div>
       </ul>
   </div>
 </nav>
