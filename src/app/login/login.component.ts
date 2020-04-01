@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { Router} from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AuthenticationService } from '../core/services/authentication.service';
 import { first } from 'rxjs/operators';
+import { AuthenticationService, MensajeService } from '../core/services';
 
 @Component({
     selector: 'app-login',
@@ -12,51 +12,38 @@ import { first } from 'rxjs/operators';
 })
 export class LoginComponent implements OnInit {
   public loginForm: FormGroup;
-  public submitted: boolean = false;
-  public msjUsuario: string = '';
-  public msjPass: string = '';
-  public errorAutenticacion: boolean = false;
+  public mensaje: string = '';
+  public huboError: boolean = false;
+  public show = false;
 
-  constructor( private _fb: FormBuilder, private _usuarioService: AuthenticationService, private _router: Router ){
+  constructor( private _fb: FormBuilder, private _usuarioService: AuthenticationService, private _router: Router, private _mensajeService: MensajeService ){
     this.loginForm = _fb.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required]
-    });
+      username: '',
+      password: ''
+    })
   }
 
   ngOnInit(){
-
+    this.isLogin();
   }
 
-  ingresar() {
-    this.submitted = true;
-    this.msjUsuario = '';
-    this.msjPass = '';
-    this.errorAutenticacion = false;
-
-    if (this.loginForm.invalid) {
-      if (this.msjPass == '' && this.loginForm.get('username').hasError('required')){
-        this.msjUsuario = "Por favor ingrese un nombre de usuario.";
-      }else if ( this.msjUsuario == '' && this.loginForm.get('password').hasError('required')){
-        this.msjPass = "Por favor ingrese una contraseña.";
-      }
-      return;
-    }else{
-      // generar servicio para loguear un usuario
-      this.autenticarUsuario(this.loginForm.value);
-    }
-  }
-
-  autenticarUsuario(params){
-    this._usuarioService.logueo(params)
+  ingresar(){
+    this._usuarioService.logueo(this.loginForm.value)
     .pipe(first())
     .subscribe(
       respuesta => {
-        this._router.navigate(['/beneficiarios']);
-      },error => {
-        this.errorAutenticacion = true;
+        this._router.navigate(['/beneficiario']);
+      }, error => {
+        this.loginForm.patchValue({ username: '', password: '' });
+        this.huboError = true;
+        this.mensaje = "Usuario o contraseña no son validos";
       }
-    )
+    );
   }
 
+  private isLogin(){
+    if (localStorage.getItem('token-nutre') != null) {
+      this._router.navigate(['/beneficiario']);
+    }
+  }
 }

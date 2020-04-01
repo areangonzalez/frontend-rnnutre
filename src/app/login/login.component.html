@@ -7,17 +7,13 @@
         </div>
         <form [formGroup]="loginForm" class="col-12">
           <div class="form-group" id="user-group">
-            <input type="text" class="form-control" [ngClass]="{'is-invalid': (msjUsuario != '' && loginForm.get('username').invalid)}" formControlName="username" placeholder="Nombre de usuario">
+            <input type="text" class="form-control" formControlName="username" placeholder="Nombre de usuario">
           </div>
           <div class="form-group" id="pass-group">
-            <input type="password" class="form-control" [ngClass]="{'is-invalid': (msjPass != '' && loginForm.get('password').invalid)}" formControlName="password" placeholder="Contraseña">
+            <input type="password" class="form-control" formControlName="password" (keyup.enter)="ingresar()" placeholder="Contraseña">
           </div>
           <div class="text-danger mb-3">
-              <span *ngIf="loginForm.get('username').hasError('required')">{{msjUsuario}}</span>
-              <span *ngIf="loginForm.get('password').hasError('required')">{{msjPass}}</span>
-              <span *ngIf="errorAutenticacion">
-                Por verifique sus datos.
-              </span>
+            <span *ngIf="(huboError)">{{mensaje}}</span>
           </div>
           <button type="button" class="btn btn-primary form-control" (click)="ingresar()"><i class="fas fa-sign-in-alt" ></i> Ingresar</button>
         </form>

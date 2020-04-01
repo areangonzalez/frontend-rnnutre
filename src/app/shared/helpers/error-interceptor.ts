@@ -37,7 +37,7 @@ export class ErrorInterceptor implements HttpInterceptor {
           }),
           catchError(err => {
             // sumo los errores recibidos
-            this.recibidos++;
+            // this.recibidos++;
             // error de inahutorizado
             if (err.status === 401) {
               // auto logout if 401 response returned from api

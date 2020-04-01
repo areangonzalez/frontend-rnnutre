@@ -14,7 +14,7 @@ export class AuthenticationService {
    * @param params criterios de busqueda de un beneficiario
    */
   logueo(params:any) {
-    return this._apiService.post('/login', {
+    return this._apiService.post('/usuarios/login', {
       username: params.username,
       password: params.password
     }).pipe(map((res: any) => {

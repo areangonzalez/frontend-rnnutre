@@ -95,21 +95,19 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 } */
             }
 
-            // get user by id
-            if (request.url.match(/\/users\/\d+$/) && request.method === 'GET') {
-                // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
-                /* if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') { */
-                    // find user by id in users array
-                    let urlParts = request.url.split('/');
-                    let id = parseInt(urlParts[urlParts.length - 1]);
-                    let matchedUsers = users.filter(user => { return user.id === id; });
-                    let user = matchedUsers.length ? matchedUsers[0] : null;
-
-                    return of(new HttpResponse({ status: 200, body: user }));
-                /* } else {
-                    // return 401 not authorised if token is null or invalid
-                    return throwError({ error: { message: 'Unauthorised' } });
-                } */
+            // LOGIN
+            if (request.url.match('/apimock/usuarios/login') && request.method === 'POST') {
+              if (request.body.username === 'admin' && request.body.password === 'admins') {
+                // if login details are valid return 200 OK with a fake jwt token
+                let body = {
+                    username: 'admin',
+                    access_token: 'fake-jwt-token'
+                };
+                return of(new HttpResponse({ status: 200, body }));
+              } else {
+                  // else return 400 bad request
+                  return throwError( { code:0,status: 500, message: 'Usuario o contraseña inconrrecta' } );
+              }
             }
 
             // GUARDAR BENEFICIARIO
