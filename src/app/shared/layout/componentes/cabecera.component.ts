@@ -28,7 +28,7 @@ export class CabeceraComponent implements OnInit {
       setTimeout(() => {
         this._authentication.logout();
         this._loaderService.hide();
-        this._router.navigate(['/login']);
+        this._router.navigate(['/']);
       }, 1000);
     }
 
