@@ -96,7 +96,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             }
 
             // LOGIN
-            if (request.url.match('/apimock/usuarios/login') && request.method === 'POST') {
+            if (request.url.endsWith('/apimock/usuarios/login') && request.method === 'POST') {
               if (request.body.username === 'admin' && request.body.password === 'admins') {
                 // if login details are valid return 200 OK with a fake jwt token
                 let body = {

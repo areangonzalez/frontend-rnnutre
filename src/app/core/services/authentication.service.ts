@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
-import { HttpParams } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { JwtService } from './jwt.service';
 
@@ -10,20 +9,22 @@ export class AuthenticationService {
   constructor(private _apiService: ApiService, private _jwtService: JwtService) { }
 
   /**
-   * busco los beneficiarios segun criterio de busqueda
-   * @param params criterios de busqueda de un beneficiario
+   * Logueo de un usuario en el sistema
+   * @param username nombre de usuario
+   * @param password contraseña del usuario
    */
-  logueo(params:any) {
-    return this._apiService.post('/usuarios/login', {
-      username: params.username,
-      password: params.password
-    }).pipe(map((res: any) => {
-      if (res && res.access_token) {
-        let data = { username: '', token: '' };
-        data.username = res.username;
-        data.token = res.access_token;
-
+  logueo(username: string, password: string) {
+    return this._apiService.post('/usuarios/login', { username, password })
+    .pipe(map((user: any) => {
+      if (user && user.access_token) {
+        let data = { username: '', token: ''};
+        // completo los datos en el objeto
+        data.username = user.username;
+        data.token = user.access_token;
+        // guardo los datos de logueo
         this._jwtService.saveToken(data);
+
+        return user;
       }
     }));
   }
@@ -40,6 +41,11 @@ export class AuthenticationService {
     }else{
       return false;
     }
+  }
+
+  getUser() {
+    let user = this._jwtService.getToken();
+    return user.datosToken;
   }
 
   getUserName() {

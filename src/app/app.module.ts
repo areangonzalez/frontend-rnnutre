@@ -16,6 +16,7 @@ import { AppComponent } from './app.component';
 
 import { CoreModule } from "./core/core.module";
 import { AppLayoutComponent, MensajeComponent, SharedModule, LoaderComponent } from "./shared";
+import { JwtInterceptor } from './shared/helpers/jwt.interceptor';
 
 
 @NgModule({
@@ -35,7 +36,7 @@ import { AppLayoutComponent, MensajeComponent, SharedModule, LoaderComponent } f
     SharedModule,
   ],
   providers: [
-    /* { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }, */
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     // facke-backend providers
     fakeBackendProvider

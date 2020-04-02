@@ -1,30 +1,24 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppLayoutComponent } from './shared';
+import { AuthGuard } from './core/guards';
 
 const routes: Routes = [
-//  { path: 'login', component: LoginComponent },
   {
     path: 'buscar-persona',
-    data: { title: 'Inicio' },
+    data: { title: 'Buscar Persona' },
     component: AppLayoutComponent,
-    children: [
-      { path: '',
-        loadChildren: './registrar/registrar.module#RegistrarModule'
-      },
-    /*  { path: 'destinatario',
-        loadChildren: './destinatario/destinatario.module#DestinatarioModule',
-        canActivate: [AuthGuard],
-        data: { preload: true, title: 'Lista destinatarios', breadcrumb: 'Destinatarios' }
-      }*/
-    ]
+    children: [{
+      path: '',
+      loadChildren: './registrar/registrar.module#RegistrarModule'
+    }]
   },
   {
     path: 'beneficiario',
     component: AppLayoutComponent,
     children: [{
       path: '',
-      //canActivate: [AuthGuard],
+      canActivate: [AuthGuard],
       loadChildren: './beneficiario/beneficiario.module#BeneficiarioModule'
     }]
   },
@@ -39,9 +33,6 @@ const routes: Routes = [
     exports: [
         RouterModule
     ],
-    providers: [
-        /* AuthGuard,
-        AppCustomPreloader */
-    ]
+    providers: [ AuthGuard ]
 })
 export class AppRoutingModule { }

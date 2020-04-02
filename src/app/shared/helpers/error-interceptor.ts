@@ -14,8 +14,6 @@ export class ErrorInterceptor implements HttpInterceptor {
       ) { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-      console.log("recibidos: ",this.recibidos);
-      console.log("envios: ",this.envios);
         this._loadService.show();
         return next.handle(request).pipe(
           tap(res => {
