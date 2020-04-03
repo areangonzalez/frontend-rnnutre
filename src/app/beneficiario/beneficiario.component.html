@@ -2,7 +2,7 @@
   <h2 class="mb-1">Beneficiarios</h2>
 </div>
 <div class="bg-white rounded p-2">
-  <buscar-beneficiario (obtenerBusqueda)="buscar($event, configPaginacion.page)" (limpiar)="limpiarCampos()"></buscar-beneficiario>
+  <buscar-beneficiario [listaLocalidades]="lista_localidad" (obtenerBusqueda)="buscar($event, configPaginacion.page)" (limpiar)="limpiarCampos()"></buscar-beneficiario>
 
   <lista-beneficiario [ListadoBeneficiario]="listaBeneficiario" [configurarPaginacion]="configPaginacion" (cambioDePagina)="cambiarPagina($event)" [listaLocalidad]="lista_localidad"></lista-beneficiario>
 </div>

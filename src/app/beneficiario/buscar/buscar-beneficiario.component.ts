@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { FormGroup, FormBuilder } from '@angular/forms';
 
@@ -19,6 +19,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
     ]
 })
 export class BuscarBeneficiarioComponent implements OnInit {
+  @Input("listaLocalidades") public listaLocalidades: any;
   @Output("obtenerBusqueda") public obtenerBusqueda = new EventEmitter();
   @Output("limpiar") public limpiar = new EventEmitter();
   public state: string = 'small'; // estado de la animacion

@@ -22,6 +22,7 @@
               <div class="col-md-4">
                 <select class="form-control" formControlName="localidadid" [ngClass]="{'campo-seleccionado': resaltarCampo(busquedaAvanzadaForm.get('localidadid').value)}">
                   <option value="">Seleccionar Localidad</option>
+                  <option *ngFor="let localidad of listaLocalidades" value="{{localidad.id}}">{{localidad.nombre}}</option>
                 </select>
               </div>
               <div class="col-md-4">
