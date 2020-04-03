@@ -11,9 +11,7 @@
 }
 
 .logo-img{
-  margin: 20px;
-  /* margin-top: 20px;
-  margin-bottom: 20px; */
+  margin: 20px 10px;
   img {
     width: 50px !important;
     height: 50px !important;
@@ -56,4 +54,9 @@
 }
 .my-custom-class .arrow::before {
   border-top-color: darkgreen;
+}
+
+a {
+  color: none;
+  text-decoration: none;
 }

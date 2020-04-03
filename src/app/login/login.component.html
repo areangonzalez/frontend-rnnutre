@@ -17,10 +17,12 @@
           </div>
           <button type="button" class="btn btn-primary form-control" (click)="ingresar()"><i class="fas fa-sign-in-alt" ></i> Ingresar</button>
         </form>
-        <div class="col-12 d-flex justify-content-between logo-img">
-          <img src="../../assets/img/logoRN.svg" alt="Río Negro">
-          <span class="text-uppercase">DESARROLLO HUMANO Y ARTICULACIÓN SOLIDARIA</span>
-        </div>
+        <a class="no-link" [routerLink]="['/']" alt="RN Desarrollo humano y articulación solidaria">
+          <div class="col-12 d-flex justify-content-between logo-img">
+            <img src="../../assets/img/logoRN.svg" alt="Río Negro">
+            <span class="text-uppercase">DESARROLLO HUMANO Y ARTICULACIÓN SOLIDARIA</span>
+          </div>
+        </a>
       </div>
     </div>
   </div>

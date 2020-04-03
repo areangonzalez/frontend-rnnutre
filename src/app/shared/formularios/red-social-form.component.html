@@ -23,7 +23,7 @@
       </div>
     </div>
     <div class="form-group col-md-12">
-      <label for="perfil">Perfil: <i class="far fa-question-circle" style="color:cornflowerblue;" triggers="click" [autoClose]="true" [ngbTooltip]="ayudaPerfil" placement="right" container="body" #ayuda (click)="ayuda.open()" ></i> </label>
+      <label for="perfil">Perfil: <i class="far fa-question-circle" style="color:cornflowerblue;" triggers="click" [autoClose]="true" [ngbTooltip]="ayudaPerfil" placement="right" container="body" ></i> </label>
       <input type="text" class="form-control" id="perfil" formControlName="perfil"  placeholder="Ej: https://wwww.facebook.com/roberto.fernandez o roberto.fernandez" [ngClass]="{'is-invalid': (redSocialForm.get('perfil').invalid && submitted)}" (keyup)="noEspacios($event.target)" >
       <div *ngIf="(redSocialForm.get('perfil').invalid && submitted)"
           class="text-danger">
