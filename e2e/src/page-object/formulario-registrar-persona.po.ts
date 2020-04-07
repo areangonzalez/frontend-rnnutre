@@ -35,11 +35,11 @@ export class FormularioRegistrarPersonaPage {
   }
   // boton cancelar formulario
   cancelarFormulario() {
-    return this.registrarPersonaElemento().element(by.css('div.d-flex')).element(by.css('button.btn-danger'));
+    return this.registrarPersonaElemento().element(by.css('div.justify-content-between')).element(by.css('button.btn-danger'));
   }
   // boton guardar formulario
   guardarFormulairo() {
-    return this.registrarPersonaElemento().element(by.css('div-d-flex')).element(by.css('button.btn-success'));
+    return this.registrarPersonaElemento().element(by.css('div.justify-content-between')).element(by.css('button.btn-success'));
   }
 
 

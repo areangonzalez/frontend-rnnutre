@@ -42,7 +42,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         let localidades = [
           { "id": 1, "nombre": "Aguada de Guerra" }, { "id": 2, "nombre": "Bariloche" }, { "id": 3, "nombre": "Choele Choel" }, { "id": 4, "nombre": "Cinco Saltos" }, { "id": 5, "nombre": "Cipolletti" }, { "id": 6, "nombre": "Coronel Belisle" }, { "id": 7, "nombre": "General Roca" }, { "id": 8, "nombre": "Río colorado" }, { "id": 9, "nombre": "Viedma" }, { "id": 10, "nombre": "Villa Regina" }
         ];
-        let beneficiarioSimple: [{ id: 1, personaid: 1 }];
 
         // wrap in delayed observable to simulate server api call
         return of(null).pipe(mergeMap(() => {
@@ -114,18 +113,28 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             if (request.url.endsWith('/apimock/beneficiarios') && request.method === 'POST') {
                 // get new user object from post body
                 let nuevoBeneficiario = request.body;
-
+                console.log(nuevoBeneficiario);
                 // validation
-                let duplicateBeneficiario = beneficiarioSimple.filter(beneficiario => { return beneficiario.personaid === nuevoBeneficiario.id; }).length;
+                let duplicateBeneficiario = beneficiario.filter(beneficiario => { return beneficiario.personaid === nuevoBeneficiario.id; }).length;
                 if (duplicateBeneficiario) {
                     return throwError({ error: { message: 'El beneficiario ya esta registrado'} });
                 }
-                let idBeneficiario:any = beneficiarioSimple.length + 1;
+                let idBeneficiario:any = beneficiario.length + 1;
                 // save new beneficiario
-                beneficiarioSimple.push({
-                  id: idBeneficiario, personaid: nuevoBeneficiario.id
+
+                beneficiario.push({
+                  id: idBeneficiario, personaid: nuevoBeneficiario.id, estado: "pendiente",
+                  cantidad_hijo: nuevoBeneficiario.cantidad_hijo, edad_por_hijo: nuevoBeneficiario.edad_por_hijo,
+                  persona: {
+                    id: nuevoBeneficiario.id, nro_documento: nuevoBeneficiario.nro_documento, nombre: nuevoBeneficiario.nombre, apellido: nuevoBeneficiario.apellido,
+                    lugar: {
+                      localidadid: nuevoBeneficiario.lugar.localidadid, calle: nuevoBeneficiario.lugar.calle, altura: nuevoBeneficiario.lugar.altura, barrio: nuevoBeneficiario.lugar.barrio, localidad: nuevoBeneficiario.lugar.localidad
+                    },
+                    lista_red_social: nuevoBeneficiario.lista_red_social,
+                    telefono: nuevoBeneficiario.telefono, celular: nuevoBeneficiario.celular, email: nuevoBeneficiario.email
+                  }
                 });
-                localStorage.setItem('beneficiario', JSON.stringify(beneficiarioSimple));
+                localStorage.setItem('beneficiario', JSON.stringify(beneficiario));
 
                 // respond 200 OK
                 return of(new HttpResponse({ status: 200, body: { id: idBeneficiario } }));
